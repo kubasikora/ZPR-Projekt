@@ -1,5 +1,5 @@
 #include<iostream>
 
-void test(){
+void test() {
     std::cout << "hello from test\n";
 }
