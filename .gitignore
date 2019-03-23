@@ -32,6 +32,8 @@
 *.app
 
 # Scons build files
-build/*
+scada_server/build/*
+scada_server/libs/*
 .sconsign.dblite
 zpr
+
