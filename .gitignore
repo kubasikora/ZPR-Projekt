@@ -32,8 +32,8 @@
 *.app
 
 # Scons build files
-scada_server/build/*
-scada_server/libs/*
+scada/build/
+scada/libs/
 .sconsign.dblite
-zpr
-
+scada/libscada.so
+scada/__pycache__/
