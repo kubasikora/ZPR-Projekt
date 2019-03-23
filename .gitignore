@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# vscode files
+.vscode/
+
 # Scons build files
 scada/build/
 scada/libs/
