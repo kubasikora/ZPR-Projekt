@@ -1,8 +1,10 @@
 #ifndef __FOO_H_
 #define __FOO_H_
 
+#include<string>
+
 namespace zpr {
-    void foo();
+    std::string foo();
 }
 
 #endif //__FOO_H_

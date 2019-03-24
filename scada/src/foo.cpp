@@ -1,7 +1,7 @@
 #include<iostream>
 
 namespace zpr {
-void foo() {
-    std::cout << "hello from foo" << std::endl;
-}
+    std::string foo() {
+        return "hello from foo";
+    }
 }
