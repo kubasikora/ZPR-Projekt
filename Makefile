@@ -1,9 +1,11 @@
+.PHONY: all
+
 all: 
-	cd scada_server
-	ls
-	scons
-	cd ..
+	cd `pwd`/scada && scons
+
+scada:
+	cd `pwd`/scada && scons
 
 lint:
-	astyle --project --recursive *.cpp
+	astyle --project scada/src/*.cpp
 	find . -name '*.orig' -delete
