@@ -39,4 +39,10 @@ scada/build/
 scada/libs/
 .sconsign.dblite
 scada/libscada.so
+
+
+
+# python files 
 scada/__pycache__/
+*.pyc
+
