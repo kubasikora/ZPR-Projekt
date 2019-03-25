@@ -10,7 +10,7 @@ python3 = "/usr/include/python3.6"
 
 # create object files in BUILD_DIR directory
 VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-env = Environment(TARGET_ARCH='x86', CCFLAGS=["-fPIC", "-Wall"])
+env = Environment(TARGET_ARCH='x86', CCFLAGS=["-Wall", "-shared"])
 
 # collect files for compilation
 sources = Glob(BUILD_DIR + '/*.cpp')
@@ -18,20 +18,26 @@ sources = Glob(BUILD_DIR + '/*.cpp')
 # collect include files
 env.Append(CPPPATH= [
     INCLUDE_DIR,
-    "libs/boost",
+    'libs/boost',
+    'libs/pqxx/install',
     python3
 ])
 
 # collect compiled libs
 env.Append(LIBPATH = [
-    "libs/boost"
+    'libs/boost',
+    'libs/pqxx/install/lib'
 ])
 
 # specify libraries
 libs = [
-    'boost_python3'
+    'boost_python3',
+    'pqxx',
+    'pq'
 ]
 
 # make shared object
 libs = env.SharedLibrary(target="scada", source=sources, LIBS=libs)
 env.Default(libs)
+
+#env.Program(target="scada", source=sources, LIBS=libs)

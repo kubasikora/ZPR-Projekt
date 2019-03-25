@@ -7,7 +7,7 @@ app.config.from_object(DevConfig)
 
 @app.route('/')
 def home():
-    return Response(scada.foo())
+    return Response(scada.getData())
 
 if __name__ == '__main__':
     app.run()

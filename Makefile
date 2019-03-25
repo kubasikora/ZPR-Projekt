@@ -9,3 +9,7 @@ scada:
 lint:
 	astyle --project scada/src/*.cpp
 	find . -name '*.orig' -delete
+
+clean:
+	rm -rf scada/build/*
+	rm scada/libscada.so

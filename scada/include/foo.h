@@ -5,6 +5,7 @@
 
 namespace zpr {
     std::string foo();
+    std::string getData();
 }
 
 #endif //__FOO_H_
