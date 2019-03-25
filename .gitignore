@@ -40,9 +40,15 @@ scada/libs/
 .sconsign.dblite
 scada/libscada.so
 
-
-
 # python files 
 scada/__pycache__/
 *.pyc
+
+# latex files
+*.aux
+*.fdb_latexmk
+*.fls 
+*.log
+*.out
+*.synctex.gz
 
