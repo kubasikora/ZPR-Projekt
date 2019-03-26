@@ -18,17 +18,9 @@ namespace zpr {
             "user=zpr host=localhost password=zpr dbname=zpr port=5432"
         );
 
-        //std::cout << "Connected to " << conn.dbname() << std::endl;
-
         pqxx::work statement(conn);
-        pqxx::result resultSet = statement.exec("SELECT * FROM test");
-
-        /*    
-        std::cout << "Found " << resultSet.size() << " messages: " << std::endl;
-        for (auto row: resultSet){
-            std::cout << row[1].c_str() << std::endl;
-        }
-        */
+        pqxx::result resultSet = statement.exec("SELECT * FROM measurements WHERE device_id=2 order by timestamp ");    
+        if(resultSet.empty()) return "undefined";
 
         return resultSet[0][1].c_str();
     }
