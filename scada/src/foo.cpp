@@ -19,7 +19,7 @@ namespace zpr {
         );
 
         pqxx::work statement(conn);
-        pqxx::result resultSet = statement.exec("SELECT * FROM measurements WHERE device_id=2 order by timestamp ");    
+        pqxx::result resultSet = statement.exec("SELECT * FROM measurements WHERE device_id=2 order by timestamp desc ");    
         if(resultSet.empty()) return "undefined";
 
         return resultSet[0][1].c_str();

@@ -10,10 +10,13 @@ python3 = "/usr/include/python3.6"
 
 # create object files in BUILD_DIR directory
 VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-env = Environment(TARGET_ARCH='x86', CCFLAGS=["-Wall", "-shared"])
+env = Environment(TARGET_ARCH='x86', CCFLAGS=["-Wall", "-shared", "-Wextra"])
 
 # collect files for compilation
-sources = Glob(BUILD_DIR + '/*.cpp')
+sources = [Glob(BUILD_DIR + '/*.cpp'), 
+            Glob(BUILD_DIR + '/controllers/*.cpp'),
+           Glob(BUILD_DIR + '/mappers/*.cpp'),
+           Glob(BUILD_DIR + '/services/*.cpp')]
 
 # collect include files
 env.Append(CPPPATH= [
@@ -39,5 +42,3 @@ libs = [
 # make shared object
 libs = env.SharedLibrary(target="scada", source=sources, LIBS=libs)
 env.Default(libs)
-
-#env.Program(target="scada", source=sources, LIBS=libs)
