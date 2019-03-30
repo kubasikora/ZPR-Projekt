@@ -17,15 +17,14 @@ PostgreSQLService::PostgreSQLService(std::string host, std::string user, std::st
 std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(std::string query){
     std::shared_ptr<pqxx::work> worker = this->getWorker();
     pqxx::result resultDb = worker->exec(query);
-    auto resultSet = std::make_shared<std::vector<std::string>>();
+    std::shared_ptr<std::vector<std::string>> resultSet = std::make_shared<std::vector<std::string>>();
 
     const int columns = resultDb.columns();
     for (auto record = resultDb.begin(); record != resultDb.end(); ++record){
         for (int column = 0; column < columns; ++column){
-            std::cout << (*record)[column] << std::endl;
+            resultSet->push_back(std::string((*record)[column].c_str()));
         }
     }
-
     return resultSet;
 }
 

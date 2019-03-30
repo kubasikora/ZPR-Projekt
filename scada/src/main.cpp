@@ -1,8 +1,7 @@
-#include<boost/python.hpp>
-#include"foo.h"
-#include"controllers/MeasurementController.hpp"
 #include<iostream>
+#include<boost/python.hpp>
 
+#include"controllers/MeasurementController.hpp"
 
 void initModule(){
 
@@ -11,6 +10,6 @@ void initModule(){
 BOOST_PYTHON_MODULE(libscada) {
     initModule();
 
-    boost::python::class_<zpr::MeasurementController>("MeasurementController")
+    boost::python::class_<zpr::MeasurementController>("MeasurementController", boost::python::init<boost::python::dict&>())
     .def("postNewMeasurement", &zpr::MeasurementController::postNewMeasurement);
 }

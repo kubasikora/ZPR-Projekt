@@ -1,5 +1,5 @@
-#ifndef __POSTGRESQL_SERVICE_H_
-#define __POSTGRESQL_SERVICE_H_
+#ifndef __POSTGRESQL_SERVICE_HPP_
+#define __POSTGRESQL_SERVICE_HPP_
 
 #include<vector>
 #include<memory>
@@ -28,4 +28,4 @@ class PostgreSQLService : public DatabaseService {
 
 }
 
-#endif //__POSTGRESQL_SERVICE_H_
+#endif //__POSTGRESQL_SERVICE_HPP_
