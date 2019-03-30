@@ -6,10 +6,10 @@
 
 namespace zpr {
 
-class MeasurementController{
+class MeasurementController {
   public:
     MeasurementController();
-    std::string postNewMeasurement();
+    std::string postNewMeasurement(boost::python::dict& request);
 };
 
 }

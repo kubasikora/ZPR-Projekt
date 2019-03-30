@@ -4,9 +4,6 @@
 #include<string>
 
 #include<pqxx/pqxx>
-//#include<boost/shared_ptr.hpp>
-
-
 
 namespace zpr {
     std::string foo() {
