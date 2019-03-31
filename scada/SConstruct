@@ -36,6 +36,7 @@ env.Append(LIBPATH = [
 # specify libraries
 libs = [
     'boost_python3',
+    'boost_date_time',
     'pqxx',
     'pq'
 ]

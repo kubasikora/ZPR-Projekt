@@ -8,7 +8,7 @@ namespace zpr {
 
 class DatabaseService {
   public:
-    virtual std::shared_ptr<std::vector<std::string>> doWork(std::string query) = 0;
+    virtual std::shared_ptr<std::vector<std::string>> doWork(const std::string query) = 0;
 };
 
 }

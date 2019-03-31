@@ -3,10 +3,14 @@
 
 #include<string>
 #include<boost/python.hpp>
+#include<boost/date_time/posix_time/ptime.hpp>
+#include<memory>
 
 namespace zpr {
 
-std::string extractKeyFromPythonDict(boost::python::dict& dict, std::string key);
+std::string extractKeyFromPythonDict(const boost::python::dict& dict, std::string key);
+std::string pTimeToTimestamp(const boost::posix_time::ptime &time);
+std::shared_ptr<boost::posix_time::ptime> timestampToPTime(const std::string timestamp);
 
 }
 

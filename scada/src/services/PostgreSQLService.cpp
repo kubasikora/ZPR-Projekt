@@ -14,7 +14,7 @@ PostgreSQLService::PostgreSQLService(std::string host, std::string user, std::st
     this->port = port;
 }
 
-std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(std::string query){
+std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::string query){
     std::shared_ptr<pqxx::work> worker = this->getWorker();
     pqxx::result resultDb = worker->exec(query);
     std::shared_ptr<std::vector<std::string>> resultSet = std::make_shared<std::vector<std::string>>();
@@ -25,6 +25,7 @@ std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(std::string 
             resultSet->push_back(std::string((*record)[column].c_str()));
         }
     }
+    worker->commit();
     return resultSet;
 }
 

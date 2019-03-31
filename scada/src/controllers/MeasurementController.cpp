@@ -1,9 +1,11 @@
 #include<string>
 #include<boost/python.hpp>
+#include<iostream>
 
 #include"controllers/MeasurementController.hpp"
 #include"services/PostgreSQLService.hpp"
 #include"services/DatabaseService.hpp"
+#include"mappers/Measurement.hpp"
 
 #include"utilities/utilities.hpp"
 
@@ -17,13 +19,12 @@ MeasurementController::MeasurementController(boost::python::dict& env) {
 }
 
 std::string MeasurementController::postNewMeasurement(boost::python::dict& request){
-    std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
-    db->doWork("SELECT * FROM measurements WHERE device_id=2 order by timestamp desc");
-    
-    std::string returnMessage = extractKeyFromPythonDict(request, "arg");
-    if(!returnMessage.compare(std::string(""))) returnMessage = "OK";
+    Measurement newMeasurement(request);
 
-    return returnMessage;
+    std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
+    db->doWork(newMeasurement.mapEntityToSQLInsert());
+
+    return std::string("OK");
 }
 
 }

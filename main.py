@@ -12,7 +12,7 @@ db = {
     "port": "5432"
 }
 
-@app.route('/measurement')
+@app.route('/measurement', methods = ['POST'])
 def home():
     return Response(MeasurementController(db).postNewMeasurement(request.form))
 
