@@ -10,7 +10,7 @@ std::string extractKeyFromPythonDict(const boost::python::dict& dict, std::strin
         boost::python::object keyValue = dict.get(key);
         return boost::python::extract<std::string>(keyValue);
     }
-    else return std::string("");
+    else throw KeyDoNotExistsException(key);
 }
 
 }

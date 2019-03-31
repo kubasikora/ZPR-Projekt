@@ -19,12 +19,18 @@ MeasurementController::MeasurementController(boost::python::dict& env) {
 }
 
 std::string MeasurementController::postNewMeasurement(boost::python::dict& request){
-    Measurement newMeasurement(request);
+    try{
+        Measurement newMeasurement(request);
 
-    std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
-    db->doWork(newMeasurement.mapEntityToSQLInsert());
+        std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
+        db->doWork(newMeasurement.mapEntityToSQLInsert());
 
-    return std::string("OK");
+        return std::string("OK");
+    }
+    catch(KeyDoNotExistsException& ex){
+        std::string returnMessage = "Missing key " + ex.key;
+        return returnMessage;
+    }
 }
 
 }
