@@ -9,7 +9,8 @@ namespace zpr {
 class DatabaseController {
   public:
     DatabaseController(boost::python::dict& env);
-    
+    virtual ~DatabaseController() = 0;
+
     std::string host;
     std::string user;
     std::string password;
