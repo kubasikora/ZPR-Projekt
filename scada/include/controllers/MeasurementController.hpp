@@ -4,18 +4,14 @@
 #include<string>
 #include<boost/python.hpp>
 
+#include"controllers/DatabaseController.hpp"
+
 namespace zpr {
 
-class MeasurementController {
+class MeasurementController : private DatabaseController {
   public:
-    MeasurementController(boost::python::dict& env);
+    MeasurementController(boost::python::dict& env) : DatabaseController(env) {}
     std::string postNewMeasurement(boost::python::dict& request);
-  
-  private:
-    std::string host;
-    std::string user;
-    std::string password;
-    std::string port;
 };
 
 }
