@@ -1,8 +1,11 @@
 class Config(object):
-    pass
+    RESTUFL_JSON = {
+        'ensure_ascii': False
+    }
 
 class ProdConfig(object):
-    pass
+    DB_PASS = '.db_pass'
 
 class DevConfig(object):
     DEBUG = True
+    DB_PASS = '.debug_db_pass'

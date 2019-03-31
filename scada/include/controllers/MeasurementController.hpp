@@ -5,10 +5,11 @@
 #include<boost/python.hpp>
 
 #include"controllers/DatabaseController.hpp"
+#include"controllers/RESTServiceController.hpp"
 
 namespace zpr {
 
-class MeasurementController : private DatabaseController {
+class MeasurementController : public DatabaseController, public RESTServiceController {
   public:
     MeasurementController(boost::python::dict& env) : DatabaseController(env) {}
     std::string postNewMeasurement(boost::python::dict& request);

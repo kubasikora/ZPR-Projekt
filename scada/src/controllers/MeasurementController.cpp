@@ -17,10 +17,12 @@ std::string MeasurementController::postNewMeasurement(boost::python::dict& reque
         std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
         db->doWork(newMeasurement.mapEntityToSQLInsert());
 
+        this->statusCode = 201;
         return std::string("OK");
     }
     catch(KeyDoNotExistsException& ex){
         std::string returnMessage = "Missing key " + ex.key;
+        this->statusCode = 400;
         return returnMessage;
     }
 }
