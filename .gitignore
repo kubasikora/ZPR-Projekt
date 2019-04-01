@@ -42,6 +42,8 @@ scada/libscada.so
 
 # python files 
 scada/__pycache__/
+__pycache__/
+__tests__/__pycache__
 *.pyc
 
 # latex files
@@ -52,3 +54,9 @@ scada/__pycache__/
 *.out
 *.synctex.gz
 
+# db passes 
+.db_pass
+.debug_db_pass
+
+# testfiles
+.cache/
