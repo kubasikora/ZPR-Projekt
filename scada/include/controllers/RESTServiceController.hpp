@@ -5,7 +5,7 @@ namespace zpr {
 
 class RESTServiceController {
   public:
-    RESTServiceController() : statusCode(0) {}
+    RESTServiceController() : statusCode(418) {}
     int getStatusCode() {return this->statusCode;}
   protected:
     int statusCode;
