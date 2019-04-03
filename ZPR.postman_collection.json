@@ -7,66 +7,147 @@
 	},
 	"item": [
 		{
-			"name": "Proper data insert",
-			"event": [
+			"name": "Data insert",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
-						"exec": [
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"OK\");",
-							"});",
-							"",
-							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201]);",
-							"});",
-							""
+					"name": "Missing deviceId in body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
+								"exec": [
+									"pm.test(\"Error info is correct\", function () {",
+									"    pm.response.to.have.body(\"Missing key deviceId\");",
+									"});",
+									"",
+									"pm.test(\"Unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
 						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "value",
-							"value": "34.5",
-							"type": "text"
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "value",
+									"value": "34.5",
+									"type": "text"
+								}
+							]
 						},
+						"url": {
+							"raw": "localhost:5000/measurement",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"measurement"
+							]
+						}
+					},
+					"response": [
 						{
-							"key": "deviceId",
-							"value": "1",
-							"type": "text"
+							"name": "Proper data insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "value",
+											"value": "34.5",
+											"type": "text"
+										},
+										{
+											"key": "deviceId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:5000/measurement",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"measurement"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.15.1 Python/3.6.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 31 Mar 2019 18:07:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
 						}
 					]
 				},
-				"url": {
-					"raw": "localhost:5000/measurement",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"measurement"
-					]
-				}
-			},
-			"response": [
 				{
 					"name": "Proper data insert",
-					"originalRequest": {
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
+								"exec": [
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
 						"method": "POST",
 						"header": [
 							{
@@ -102,95 +183,216 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "html",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "2"
-						},
-						{
-							"key": "Server",
-							"value": "Werkzeug/0.15.1 Python/3.6.7"
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 31 Mar 2019 18:07:20 GMT"
-						}
-					],
-					"cookie": [],
-					"body": "OK"
-				}
-			]
-		},
-		{
-			"name": "MIssing deviceId data insert",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
-						"exec": [
-							"pm.test(\"Error info is correct\", function () {",
-							"    pm.response.to.have.body(\"Missing key deviceId\");",
-							"});",
-							"",
-							"pm.test(\"Unsuccessful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([400]);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "value",
-							"value": "34.5",
-							"type": "text"
+							"name": "Proper data insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "value",
+											"value": "34.5",
+											"type": "text"
+										},
+										{
+											"key": "deviceId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:5000/measurement",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"measurement"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.15.1 Python/3.6.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 31 Mar 2019 18:07:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
 						}
 					]
 				},
-				"url": {
-					"raw": "localhost:5000/measurement",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"measurement"
-					]
-				}
-			},
-			"response": [
 				{
-					"name": "Proper data insert",
-					"originalRequest": {
+					"name": "Missing value in body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
+								"exec": [
+									"pm.test(\"Error info is correct\", function () {",
+									"    pm.response.to.have.body(\"Missing key value\");",
+									"});",
+									"",
+									"pm.test(\"Unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"type": "text"
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "deviceId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/measurement",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"measurement"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Proper data insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "value",
+											"value": "34.5",
+											"type": "text"
+										},
+										{
+											"key": "deviceId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:5000/measurement",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"measurement"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.15.1 Python/3.6.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 31 Mar 2019 18:07:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						}
+					]
+				},
+				{
+					"name": "Incorrect value in body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
+								"exec": [
+									"pm.test(\"Error info is correct\", function () {",
+									"    pm.response.to.have.body(\"Invalid key\");",
+									"});",
+									"",
+									"pm.test(\"Unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -198,7 +400,7 @@
 							"formdata": [
 								{
 									"key": "value",
-									"value": "34.5",
+									"value": "asbs",
 									"type": "text"
 								},
 								{
@@ -219,87 +421,93 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "html",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "2"
-						},
-						{
-							"key": "Server",
-							"value": "Werkzeug/0.15.1 Python/3.6.7"
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 31 Mar 2019 18:07:20 GMT"
-						}
-					],
-					"cookie": [],
-					"body": "OK"
-				}
-			]
-		},
-		{
-			"name": "MIssing value data insert",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4aa42cf0-c334-4b53-9077-fcaa565227d8",
-						"exec": [
-							"pm.test(\"Error info is correct\", function () {",
-							"    pm.response.to.have.body(\"Missing key value\");",
-							"});",
-							"",
-							"pm.test(\"Unsuccessful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([400]);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "deviceId",
-							"value": "1",
-							"type": "text"
+							"name": "Proper data insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "value",
+											"value": "34.5",
+											"type": "text"
+										},
+										{
+											"key": "deviceId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:5000/measurement",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"measurement"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.15.1 Python/3.6.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 31 Mar 2019 18:07:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
 						}
 					]
 				},
-				"url": {
-					"raw": "localhost:5000/measurement",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"measurement"
-					]
-				}
-			},
-			"response": [
 				{
-					"name": "Proper data insert",
-					"originalRequest": {
+					"name": "Incorrect deviceId in body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "31ab5d79-c2a7-45d6-875e-f707979dbd14",
+								"exec": [
+									"pm.test(\"Error info is correct\", function () {",
+									"    pm.response.to.have.body(\"Invalid key\");",
+									"});",
+									"",
+									"pm.test(\"Unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
 						"method": "POST",
 						"header": [
 							{
@@ -319,7 +527,7 @@
 								},
 								{
 									"key": "deviceId",
-									"value": "1",
+									"value": "asb",
 									"type": "text"
 								}
 							]
@@ -335,29 +543,59 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "html",
-					"header": [
+					"response": []
+				},
+				{
+					"name": "Nonexisting deviceId in body",
+					"event": [
 						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "2"
-						},
-						{
-							"key": "Server",
-							"value": "Werkzeug/0.15.1 Python/3.6.7"
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 31 Mar 2019 18:07:20 GMT"
+							"listen": "test",
+							"script": {
+								"id": "69dfab7f-b483-44ad-b4c4-c8449514849c",
+								"exec": [
+									"pm.test(\"Error info is correct\", function () {",
+									"    pm.response.to.have.body(\"Nonexisting device\");",
+									"});",
+									"",
+									"pm.test(\"Unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"cookie": [],
-					"body": "OK"
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "value",
+									"value": "34.5",
+									"type": "text"
+								},
+								{
+									"key": "deviceId",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/measurement",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"measurement"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

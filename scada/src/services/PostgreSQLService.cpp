@@ -3,6 +3,7 @@
 #include<pqxx/pqxx>
 #include<iostream>
 
+#include"services/DatabaseService.hpp"
 #include"services/PostgreSQLService.hpp"
 
 namespace zpr {
@@ -15,18 +16,23 @@ PostgreSQLService::PostgreSQLService(std::string host, std::string user, std::st
 }
 
 std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::string query){
-    std::shared_ptr<pqxx::work> worker = this->getWorker();
-    pqxx::result resultDb = worker->exec(query);
-    std::shared_ptr<std::vector<std::string>> resultSet = std::make_shared<std::vector<std::string>>();
+    try { 
+        std::shared_ptr<pqxx::work> worker = this->getWorker();
+        pqxx::result resultDb = worker->exec(query);
+        std::shared_ptr<std::vector<std::string>> resultSet = std::make_shared<std::vector<std::string>>();
 
-    const int columns = resultDb.columns();
-    for (auto record = resultDb.begin(); record != resultDb.end(); ++record){
-        for (int column = 0; column < columns; ++column){
-            resultSet->push_back(std::string((*record)[column].c_str()));
+        const int columns = resultDb.columns();
+        for (auto record = resultDb.begin(); record != resultDb.end(); ++record){
+            for (int column = 0; column < columns; ++column){
+                resultSet->push_back(std::string((*record)[column].c_str()));
+            }
         }
+        worker->commit();
+        return resultSet;
+    } 
+    catch(pqxx::foreign_key_violation& ex){
+        throw ForeignKeyViolationException();
     }
-    worker->commit();
-    return resultSet;
 }
 
 void PostgreSQLService::createConnection() {

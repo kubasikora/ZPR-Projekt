@@ -1,4 +1,5 @@
 #include<string>
+#include<stdexcept>
 #include<boost/python.hpp>
 
 #include"controllers/MeasurementController.hpp"
@@ -22,6 +23,16 @@ std::string MeasurementController::postNewMeasurement(boost::python::dict& reque
     }
     catch(KeyDoNotExistsException& ex){
         std::string returnMessage = "Missing key " + ex.key;
+        this->statusCode = 400;
+        return returnMessage;
+    }
+    catch(std::invalid_argument& ex){
+        std::string returnMessage = "Invalid key";
+        this->statusCode = 400;
+        return returnMessage;
+    }
+    catch(ForeignKeyViolationException& ex){
+        std::string returnMessage = "Nonexisting device";
         this->statusCode = 400;
         return returnMessage;
     }
