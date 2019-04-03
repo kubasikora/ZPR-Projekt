@@ -1,6 +1,6 @@
 from flask import Flask, Response, request
 from config import DevConfig, ProdConfig
-from scada import MeasurementController
+from scada import MeasurementController, SerializeDataController
 import os
 import json
 
@@ -14,9 +14,16 @@ with open(app.config['DB_PASS']) as db_pass:
 	db = json.load(db_pass)
 
 @app.route('/measurement', methods = ['POST'])
-def home():
+def measurement():
     controller = MeasurementController(db)
     response = controller.postNewMeasurement(request.form)
+    statusCode = controller.getStatusCode()
+    return Response(response=response, status=statusCode)
+
+@app.route('/getSerializedData', methods = ['GET'])
+def getSerializedData():
+    controller = SerializeDataController(db)
+    response = controller.getSerializedData(request.args)
     statusCode = controller.getStatusCode()
     return Response(response=response, status=statusCode)
 
