@@ -6,9 +6,9 @@
 
 namespace zpr {
 
-std::shared_ptr<boost::posix_time::ptime> timestampToPTime(const std::string timestamp){
-    std::shared_ptr<boost::posix_time::ptime> timeObject = std::make_shared<boost::posix_time::ptime>();
-    *timeObject = boost::posix_time::time_from_string(timestamp);
+boost::posix_time::ptime timestampToPTime(const std::string timestamp){
+    boost::posix_time::ptime timeObject = boost::posix_time::ptime();
+    timeObject = boost::posix_time::time_from_string(timestamp);
     return timeObject;
 }
 

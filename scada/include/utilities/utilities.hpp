@@ -17,7 +17,7 @@ class KeyDoNotExistsException : public std::exception {
 
 std::string extractKeyFromPythonDict(const boost::python::dict& dict, std::string key);
 std::string pTimeToTimestamp(const boost::posix_time::ptime &time);
-std::shared_ptr<boost::posix_time::ptime> timestampToPTime(const std::string timestamp);
+boost::posix_time::ptime timestampToPTime(const std::string timestamp);
 
 }
 

@@ -11,8 +11,10 @@ namespace zpr {
 class Entity {
   public:
     Entity(const long id) : id(id) {};
-    virtual std::string mapEntityToSQLInsert() = 0;
-  private:
+    virtual const std::string mapEntityToSQLInsert() const {
+      return std::string("");
+    }
+  protected:
     long id;
 };
 
