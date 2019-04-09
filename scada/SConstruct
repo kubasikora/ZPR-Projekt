@@ -30,12 +30,14 @@ env.Append(CPPPATH= [
 # collect compiled libs
 env.Append(LIBPATH = [
     'libs/boost',
+    'libs/boost/stage',
+    'libs/boost/stage/lib',
     'libs/pqxx/install/lib'
 ])
 
 # specify libraries
 libs = [
-    'boost_python3',
+    'boost_python36',
     'boost_date_time',
     'pqxx',
     'pq'
