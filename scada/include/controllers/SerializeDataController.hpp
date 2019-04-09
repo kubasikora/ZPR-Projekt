@@ -12,7 +12,7 @@ namespace zpr {
 class SerializeDataController : public DatabaseController, public RESTServiceController {
   public:
     SerializeDataController(boost::python::dict& env) : DatabaseController(env) {}
-    std::string getSerializedData(boost::python::dict& arguments);
+    boost::python::dict getSerializedData(boost::python::dict& arguments);
 };
 
 }

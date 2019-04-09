@@ -23,7 +23,7 @@ def measurement():
 @app.route('/getSerializedData', methods = ['GET'])
 def getSerializedData():
     controller = SerializeDataController(db)
-    response = controller.getSerializedData(request.args)
+    response = json.dumps(controller.getSerializedData(request.args))
     statusCode = controller.getStatusCode()
     return Response(response=response, status=statusCode)
 
