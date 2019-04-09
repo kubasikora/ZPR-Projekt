@@ -3,6 +3,7 @@
 
 #include"controllers/MeasurementController.hpp"
 #include"controllers/SerializeDataController.hpp"
+#include"controllers/StateController.hpp"
 
 void initModule(){
 
@@ -18,5 +19,8 @@ BOOST_PYTHON_MODULE(libscada) {
     boost::python::class_<zpr::SerializeDataController>("SerializeDataController", boost::python::init<boost::python::dict&>())
     .def("getSerializedData", &zpr::SerializeDataController::getSerializedData)
     .def("getStatusCode", &zpr::SerializeDataController::getStatusCode);
+
+    boost::python::class_<zpr::StateController>("StateController")
+    .def("getValue", &zpr::StateController::getValue);
 
 }

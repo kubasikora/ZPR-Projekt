@@ -4,7 +4,7 @@
 
 #include"controllers/MeasurementController.hpp"
 #include"services/PostgreSQLService.hpp"
-#include"services/DatabaseService.hpp"
+#include"services/StateService.hpp"
 #include"mappers/Measurement.hpp"
 
 #include"utilities/utilities.hpp"
@@ -18,6 +18,9 @@ std::string MeasurementController::postNewMeasurement(boost::python::dict& reque
         std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
         db->doWork(newMeasurement.mapEntityToSQLInsert());
 
+        StateService* state = StateService::getInstance();
+        state->updateState(newMeasurement.getDeviceId(), newMeasurement.getValue());
+        
         this->statusCode = 201;
         return std::string("OK");
     }

@@ -47,4 +47,8 @@ double Measurement::getValue() const {
     return this->value;
 }
 
+long Measurement::getDeviceId() const {
+    return this->deviceId;
+}
+
 }

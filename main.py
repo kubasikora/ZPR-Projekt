@@ -1,6 +1,6 @@
 from flask import Flask, Response, request
 from config import DevConfig, ProdConfig
-from scada import MeasurementController, SerializeDataController
+from scada import MeasurementController, SerializeDataController, StateController
 import os
 import json
 

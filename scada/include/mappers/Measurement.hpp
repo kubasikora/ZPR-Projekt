@@ -14,6 +14,7 @@ class Measurement : public Entity {
     Measurement(const boost::python::dict& request);
     virtual const std::string mapEntityToSQLInsert() const;
     double getValue() const;
+    long getDeviceId() const;
   private:
     double value;
     long deviceId;
