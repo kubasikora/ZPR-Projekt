@@ -21,6 +21,7 @@ BOOST_PYTHON_MODULE(libscada) {
     .def("getStatusCode", &zpr::SerializeDataController::getStatusCode);
 
     boost::python::class_<zpr::StateController>("StateController")
-    .def("getValue", &zpr::StateController::getValue);
+    .def("getValue", &zpr::StateController::getValue)
+    .def("getState", &zpr::StateController::getState);
 
 }

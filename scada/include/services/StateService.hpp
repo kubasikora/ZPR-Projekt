@@ -1,17 +1,20 @@
 #ifndef __APP_STATE_HPP_
 #define __APP_STATE_HPP_
 
+#include<boost/python.hpp>
 #include<memory>
 #include<map>
 #include<mutex>
 
 namespace zpr
 {
-  class StateService {
+
+class StateService {
   public:
     static StateService* getInstance();
     void updateState(int deviceId, double measurementValue);
     double getValue(int deviceId);
+    boost::python::dict mapToPythonDict();
   private:
     StateService() {}
     StateService(const StateService&) = delete;
