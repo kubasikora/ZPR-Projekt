@@ -27,5 +27,12 @@ def getSerializedData():
     statusCode = controller.getStatusCode()
     return Response(response=response, status=statusCode)
 
+@app.route('/state', methods = ['GET'])
+def state():
+    controller = StateController()
+    response = json.dumps(controller.getState())
+    statusCode = controller.getStatusCode()
+    return Response(response=response, status=statusCode)
+
 if __name__ == '__main__':
     app.run(threaded=True)
