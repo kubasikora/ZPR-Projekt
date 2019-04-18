@@ -8,18 +8,18 @@
 
 namespace zpr {
 
-PostgreSQLService::PostgreSQLService(std::string host, std::string user, std::string password, std::string port) {
-    this->host = host;
-    this->user = user;
-    this->password = password;
-    this->port = port;
-}
+PostgreSQLService::PostgreSQLService(const std::string host, const std::string user, const std::string password, const std::string port) :
+host(host), 
+user(user), 
+password(password), 
+port(port) {}
 
-std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::string query){
+
+std::unique_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::string query){
     try { 
-        std::shared_ptr<pqxx::work> worker = this->getWorker();
+        std::unique_ptr<pqxx::work> worker = this->getWorker();
         pqxx::result resultDb = worker->exec(query);
-        std::shared_ptr<std::vector<std::string>> resultSet = std::make_shared<std::vector<std::string>>();
+        std::unique_ptr<std::vector<std::string>> resultSet = std::make_unique<std::vector<std::string>>();
 
         const int columns = resultDb.columns();
         for (auto record = resultDb.begin(); record != resultDb.end(); ++record){
@@ -38,12 +38,12 @@ std::shared_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::s
 void PostgreSQLService::createConnection() {
     std::string connectionString; 
     connectionString = "user=" + this->user + " host=" + this->host + " password=" + this->password + " port=" + this->port;
-    this->connection = std::make_shared<pqxx::connection>(connectionString);
+    this->connection = std::make_unique<pqxx::connection>(connectionString);
 }
 
-std::shared_ptr<pqxx::work> PostgreSQLService::getWorker() {
+std::unique_ptr<pqxx::work> PostgreSQLService::getWorker() {
     this->createConnection();
-    return std::make_shared<pqxx::work>(*(this->connection));
+    return std::make_unique<pqxx::work>(*(this->connection));
 }
 
 }

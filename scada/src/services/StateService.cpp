@@ -17,11 +17,11 @@ StateService* StateService::getInstance() {
     return instance;
 }
 
-void StateService::updateState(int deviceId, double measurementValue){
+void StateService::updateState(const int deviceId, const double measurementValue){
     this->state[deviceId] = measurementValue;
 }
 
-double StateService::getValue(int deviceId){
+double StateService::getValue(const int deviceId){
     if(this->state.find(deviceId) == this->state.end())
         return 0.0;
     else return this->state[deviceId];

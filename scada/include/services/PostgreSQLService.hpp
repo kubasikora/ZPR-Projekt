@@ -11,19 +11,19 @@ namespace zpr {
 
 class PostgreSQLService : public DatabaseService {
   public:
-    PostgreSQLService(std::string host, std::string user, std::string password, std::string port);
-    virtual std::shared_ptr<std::vector<std::string>> doWork(const std::string query);
+    PostgreSQLService(const std::string host, const std::string user, const std::string password, const std::string port);
+    virtual std::unique_ptr<std::vector<std::string>> doWork(const std::string query);
 
   private:
-    std::string host;
-    std::string user;
-    std::string password;
-    std::string port;
+    const std::string host;
+    const std::string user;
+    const std::string password;
+    const std::string port;
 
-    std::shared_ptr<pqxx::connection> connection;
+    std::unique_ptr<pqxx::connection> connection;
 
     void createConnection();
-    std::shared_ptr<pqxx::work> getWorker();
+    std::unique_ptr<pqxx::work> getWorker();
 };
 
 }

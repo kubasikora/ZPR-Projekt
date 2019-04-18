@@ -8,7 +8,7 @@ namespace zpr {
 
 class DatabaseService {
   public:
-    virtual std::shared_ptr<std::vector<std::string>> doWork(const std::string query) = 0;
+    virtual std::unique_ptr<std::vector<std::string>> doWork(const std::string query) = 0;
 };
 
 class ForeignKeyViolationException : public std::exception {};

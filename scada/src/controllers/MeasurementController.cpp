@@ -15,7 +15,7 @@ std::string MeasurementController::postNewMeasurement(boost::python::dict& reque
     try{
         Measurement newMeasurement(request);
 
-        std::shared_ptr<DatabaseService> db = std::make_shared<PostgreSQLService>(this->host, this->user, this->password, this->port);
+        std::unique_ptr<DatabaseService> db = std::make_unique<PostgreSQLService>(this->host, this->user, this->password, this->port);
         db->doWork(newMeasurement.mapEntityToSQLInsert());
 
         StateService* state = StateService::getInstance();

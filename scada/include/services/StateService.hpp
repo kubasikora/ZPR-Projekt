@@ -12,8 +12,8 @@ namespace zpr
 class StateService {
   public:
     static StateService* getInstance();
-    void updateState(int deviceId, double measurementValue);
-    double getValue(int deviceId);
+    void updateState(const int deviceId, const double measurementValue);
+    double getValue(const int deviceId);
     boost::python::dict mapToPythonDict();
   private:
     StateService() {}
