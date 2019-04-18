@@ -1,7 +1,7 @@
 ifeq ($(OS), Windows_NT)
 	PWD = %CD%
 else
-	PWD = pwd
+	PWD = `pwd`
 endif
 
 
@@ -9,10 +9,10 @@ endif
 
 
 all: 
-	cd `$(PWD)`/scada && scons
+	cd $(PWD)/scada && scons
 
 scada:
-	cd `$(PWD)`/scada && scons
+	cd $(PWD)/scada && scons
 
 lint:
 	astyle --project scada/src/*.cpp
