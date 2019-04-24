@@ -1,10 +1,18 @@
+ifeq ($(OS), Windows_NT)
+	PWD = %CD%
+else
+	PWD = `pwd`
+endif
+
+
 .PHONY: all
 
+
 all: 
-	cd `pwd`/scada && scons
+	cd $(PWD)/scada && scons
 
 scada:
-	cd `pwd`/scada && scons
+	cd $(PWD)/scada && scons
 
 lint:
 	astyle --project scada/src/*.cpp
