@@ -1,48 +1,51 @@
-import os
+import platform, shutil
 
-BUILD_DIR = "./build"
-SRC_DIR = "./src"
-INSTALL_DIR = "./install"
 INCLUDE_DIR = "./include"
-BINARY_NAME = "scada"
-python3 = "/usr/include/python3.6"
+BUILD_DIR = "./build/"
+SRC_DIR = "./src/"
 
-
-# create object files in BUILD_DIR directory
 VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-env = Environment(TARGET_ARCH='x86', CCFLAGS=["-Wall", "-shared", "-Wextra"])
+e = Environment(TARGET_ARCH='x86')
 
-# collect files for compilation
-sources = [Glob(BUILD_DIR + '/*.cpp'),
-           Glob(BUILD_DIR + '/utilities/*.cpp'), 
-           Glob(BUILD_DIR + '/controllers/*.cpp'),
-           Glob(BUILD_DIR + '/mappers/*.cpp'),
-           Glob(BUILD_DIR + '/services/*.cpp')]
+sources = [Glob(BUILD_DIR + '*.cpp'),
+           Glob(BUILD_DIR + 'utilities/*.cpp'), 
+           Glob(BUILD_DIR + 'controllers/*.cpp'),
+           Glob(BUILD_DIR + 'mappers/*.cpp'),
+           Glob(BUILD_DIR + 'services/*.cpp')]
 
-# collect include files
-env.Append(CPPPATH= [
-    INCLUDE_DIR,
-    'libs/boost',
-    'libs/pqxx/install',
-    python3
-])
+if(platform.system() == "Linux"):
+    e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
+    e.Append( LINKFLAGS = '-Wall -pthread' )
+    e.Append( CPPPATH = ['/usr/include/python3.6', 
+                         'libs/boost', 
+                         'libs/pqxx/install',
+                         INCLUDE_DIR] )
 
-# collect compiled libs
-env.Append(LIBPATH = [
-    'libs/boost',
-    'libs/boost/stage',
-    'libs/boost/stage/lib',
-    'libs/pqxx/install/lib'
-])
+    e.Append( LIBPATH = ['/usr/lib/python3.6',
+                         'libs/boost',
+                         'libs/boost/stage',
+                         'libs/boost/stage/lib',
+                         'libs/pqxx/install/lib'] )
 
-# specify libraries
-libs = [
-    'boost_python36',
-    'boost_date_time',
-    'pqxx',
-    'pq'
-]
+    e.Append( LIBS = [ 'boost_python3', 'boost_date_time', 'pqxx' ] )
 
-# make shared object
-libs = env.SharedLibrary(target="scada", source=sources, LIBS=libs)
-env.Default(libs)
+    target = 'scada.so'
+
+elif(platform.system() == "Windows"):
+    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
+    e = Environment()
+
+    e.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD' )
+    e.Append( CPPPATH = [ 'c:/Boost/include/boost-1_63', 'C:/Python27/include' ] )
+    e.Append( LIBPATH = [ 'C:/Boost/lib', 'C:/Python27/libs' ] )
+
+    target = 'hello.pyd'
+    
+else:
+    print platform.system() + " not supported"
+
+dll = e.SharedLibrary(target = 'scada', source = sources)
+
+
+
+

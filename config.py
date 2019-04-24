@@ -3,9 +3,9 @@ class Config(object):
         'ensure_ascii': False
     }
 
-class ProdConfig(object):
+class ProdConfig(Config):
     DB_PASS = '.db_pass'
 
-class DevConfig(object):
+class DevConfig(Config):
     DEBUG = True
     DB_PASS = '.debug_db_pass'
