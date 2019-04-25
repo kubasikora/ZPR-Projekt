@@ -27,7 +27,7 @@ if(platform.system() == "Linux"):
                          'libs/boost/stage/lib',
                          'libs/pqxx/install/lib'] )
 
-    e.Append( LIBS = [ 'boost_python3', 'boost_date_time', 'pqxx' ] )
+    e.Append( LIBS = [ 'boost_python36', 'boost_date_time', 'pqxx' ] )
 
     target = 'scada.so'
 

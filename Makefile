@@ -25,3 +25,4 @@ clean:
 test:
 	pytest --ignore=scada
 	newman run ZPR.postman_collection.json 
+	cd $(PWD)/client && npm test 
