@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import LoginPanel from "./LoginPanel"
 class App extends Component {
-  render() {
+  render(
+   
+  ) {
     return (
+      
       <div className="App">
         <header className="App-header">
-          <p>
-            To be done...
-          </p>
-          
-          
+         
+          <LoginPanel/>
         </header>
       </div>
     );
