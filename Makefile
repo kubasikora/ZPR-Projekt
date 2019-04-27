@@ -44,7 +44,6 @@ test:
 lint:
 	astyle --project "scada/src/*.cpp" "scada/include/*.hpp"
 
-
 documentation:
 	doxygen
 	cd $(PWD)/docs/doxygen/latex && make
