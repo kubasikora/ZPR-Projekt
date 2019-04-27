@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import LoginPanel from "./LoginPanel"
+import MeasureGrid from "./MeasureGrid"
 class App extends Component {
   render(
    
@@ -9,10 +10,10 @@ class App extends Component {
       
       <div className="App">
         <header className="App-header">
-         
-          <LoginPanel/>
         </header>
-      </div>
+      {/*<LoginPanel/>
+      */}
+      <MeasureGrid />      </div>
     );
   }
 }

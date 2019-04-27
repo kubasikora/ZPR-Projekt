@@ -1,6 +1,6 @@
 import {LOGIN_START, LOGIN_OK, LOGIN_ERROR} from "./actionTypes"
-import startState from "./startState"
- const reducers = (state=startState, action) => {
+import initialState from "./initialState"
+ const reducers = (state=initialState, action) => {
    console.log(state, action.type)
     switch (action.type) {
      

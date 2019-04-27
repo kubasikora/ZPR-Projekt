@@ -1,7 +1,7 @@
 import React from "react"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
-
+import "./LoginPanel.css"
 class LoginPanelView extends React.Component {
     constructor(props) {
       super(props);
@@ -32,17 +32,17 @@ class LoginPanelView extends React.Component {
         console.log(this.state);
         
         return (
-            <Form>
-            <Form.Group controlId="formLogin">
-              <Form.Label>Login</Form.Label>
-              <Form.Control type="login" placeholder="Enter login" onChange={this.changeLogin} />
+            <Form className="form">
+            <Form.Group className="login-form" controlId="formLogin" >
+              <Form.Label className = "login-label">Login</Form.Label>
+              <Form.Control className = "login-control" type="login" placeholder="Enter login" onChange={this.changeLogin} />
             </Form.Group>
           
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={this.changePassword}/>
+            <Form.Group className="password-form"controlId="formBasicPassword">
+              <Form.Label className = "password-label" >Password</Form.Label>
+              <Form.Control className = "password-control" type="password" placeholder="Password" onChange={this.changePassword}/>
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={this.onButtonClick}>
+            <Button className = "logger-button" variant="primary" type="submit" onClick={this.onButtonClick}>
               Submit
             </Button>
           </Form>

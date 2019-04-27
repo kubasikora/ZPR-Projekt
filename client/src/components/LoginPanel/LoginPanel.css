@@ -1,0 +1,33 @@
+.login-form{
+    display: inline;
+    margin-left: 2%;
+}
+.login-control{
+
+}
+.login-label{
+    color: gray;
+    font-size: 100%;
+    
+}
+.password-form{
+    display: inline;
+    margin-right: 2%;
+}
+.password-label{
+    color: gray;
+    font-size: 100%;
+    margin-left: 3%
+}
+.password-control{
+  
+}
+.logger-button{
+    margin-top: 5%;
+    padding: 1%;
+
+}
+.form{
+    background: whitesmoke;
+    padding: 2%
+}
