@@ -1,11 +1,11 @@
-import pytest
+import pytest, os
 from scada import MeasurementController
 
 db = {
-        "host": "localhost",
-        "user": "zpr",
-        "password": "zpr",
-        "port": "5432"
+    "host": os.environ['DEBUG_DB_HOST'],
+    "user": os.environ['DEBUG_DB_USER'],
+    "password": os.environ['DEBUG_DB_PASSWORD'],
+    "port": os.environ['DEBUG_DB_PORT']
 }
 
 TEAPOT_CODE = 418

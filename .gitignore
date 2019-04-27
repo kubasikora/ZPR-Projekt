@@ -54,9 +54,12 @@ __tests__/__pycache__
 *.out
 *.synctex.gz
 
-# db passes 
-.db_pass
-.debug_db_pass
+# environmental variables
+.env
 
 # testfiles
 .cache/
+
+# docs
+docs/doxygen/html/*
+docs/doxygen/latex/*

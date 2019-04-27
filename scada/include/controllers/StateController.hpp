@@ -5,13 +5,13 @@
 #include"controllers/RESTServiceController.hpp"
 
 namespace zpr {
- 
+
 class StateController : public RESTServiceController {
-  public:
-    double getValue(int deviceId);
-    boost::python::dict getState();
+    public:
+        double getValue(int deviceId);
+        boost::python::dict getState();
 };
 
-} 
+}
 
 #endif //__STATE_CONTROLLER_HPP_

@@ -5,21 +5,21 @@
 #include<boost/date_time.hpp>
 #include"mappers/Entity.hpp"
 
-namespace zpr { 
+namespace zpr {
 
 class Measurement : public Entity {
-  public:
-    Measurement();
-    Measurement(const std::string id, const std::string value, const std::string timestamp, const std::string deviceId);
-    Measurement(const boost::python::dict& request);
-    virtual const std::string mapEntityToSQLInsert() const;
-    double getValue() const;
-    long getDeviceId() const;
-  private:
-    double value;
-    long deviceId;
-    boost::posix_time::ptime timestamp;
-    static const std::string tableName;
+    public:
+        Measurement();
+        Measurement(const std::string id, const std::string value, const std::string timestamp, const std::string deviceId);
+        Measurement(const boost::python::dict& request);
+        virtual const std::string mapEntityToSQLInsert() const;
+        double getValue() const;
+        long getDeviceId() const;
+    private:
+        double value;
+        long deviceId;
+        boost::posix_time::ptime timestamp;
+        static const std::string tableName;
 };
 
 }

@@ -6,7 +6,7 @@
 
 namespace zpr {
 
-std::string pTimeToTimestamp(const boost::posix_time::ptime &time){
+std::string pTimeToTimestamp(const boost::posix_time::ptime &time) {
     std::stringstream ss;
     ss << time;
     return ss.str();

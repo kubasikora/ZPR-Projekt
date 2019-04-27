@@ -11,8 +11,8 @@
 
 namespace zpr {
 
-std::string MeasurementController::postNewMeasurement(boost::python::dict& request){
-    try{
+std::string MeasurementController::postNewMeasurement(boost::python::dict& request) {
+    try {
         Measurement newMeasurement(request);
 
         std::unique_ptr<DatabaseService> db = std::make_unique<PostgreSQLService>(this->host, this->user, this->password, this->port);
@@ -20,21 +20,21 @@ std::string MeasurementController::postNewMeasurement(boost::python::dict& reque
 
         StateService* state = StateService::getInstance();
         state->updateState(newMeasurement.getDeviceId(), newMeasurement.getValue());
-        
+
         this->statusCode = 201;
         return std::string("OK");
     }
-    catch(KeyDoNotExistsException& ex){
+    catch(KeyDoNotExistsException& ex) {
         std::string returnMessage = "Missing key " + ex.key;
         this->statusCode = 400;
         return returnMessage;
     }
-    catch(std::invalid_argument& ex){
+    catch(std::invalid_argument& ex) {
         std::string returnMessage = "Invalid key";
         this->statusCode = 400;
         return returnMessage;
     }
-    catch(ForeignKeyViolationException& ex){
+    catch(ForeignKeyViolationException& ex) {
         std::string returnMessage = "Nonexisting device";
         this->statusCode = 400;
         return returnMessage;

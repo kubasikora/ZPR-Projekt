@@ -6,16 +6,16 @@
 #include<boost/python.hpp>
 
 
-namespace zpr { 
+namespace zpr {
 
 class Entity {
-  public:
-    Entity(const long id) : id(id) {};
-    virtual const std::string mapEntityToSQLInsert() const {
-      return std::string("");
-    }
-  protected:
-    long id;
+    public:
+        Entity(const long id) : id(id) {};
+        virtual const std::string mapEntityToSQLInsert() const {
+            return std::string("");
+        }
+    protected:
+        long id;
 };
 
 }

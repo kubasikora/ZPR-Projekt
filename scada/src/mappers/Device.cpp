@@ -14,12 +14,12 @@ Device::Device() : Entity(0) {
 
 }
 
-Device::Device(const std::string id, 
+Device::Device(const std::string id,
                const std::string serialCode,
-               const std::string model, 
-               const std::string producer, 
-               const std::string unit, 
-               const std::string minValue, 
+               const std::string model,
+               const std::string producer,
+               const std::string unit,
+               const std::string minValue,
                const std::string maxValue) : Entity(std::stoi(id)) {
     this->serialCode = serialCode;
     this->model = model;
@@ -28,8 +28,8 @@ Device::Device(const std::string id,
     this->minValue = std::stod(minValue);
     this->maxValue = std::stod(maxValue);
 }
-   
-Device::Device(const boost::python::dict& deviceModel) : Entity(std::stoi(extractKeyFromPythonDict(deviceModel, "deviceId"))){
+
+Device::Device(const boost::python::dict& deviceModel) : Entity(std::stoi(extractKeyFromPythonDict(deviceModel, "deviceId"))) {
     this->id = std::stoi(extractKeyFromPythonDict(deviceModel, "deviceId"));
     this->serialCode = extractKeyFromPythonDict(deviceModel, "serialCode");
     this->model = extractKeyFromPythonDict(deviceModel, "model");

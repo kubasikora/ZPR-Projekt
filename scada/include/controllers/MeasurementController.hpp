@@ -10,9 +10,9 @@
 namespace zpr {
 
 class MeasurementController : public DatabaseController, public RESTServiceController {
-  public:
-    MeasurementController(boost::python::dict& env) : DatabaseController(env) {}
-    std::string postNewMeasurement(boost::python::dict& request);
+    public:
+        MeasurementController(boost::python::dict& env) : DatabaseController(env) {}
+        std::string postNewMeasurement(boost::python::dict& request);
 };
 
 }

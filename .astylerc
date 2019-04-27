@@ -1,0 +1,6 @@
+--convert-tabs
+--break-blocks
+-s4
+--indent-labels
+--indent-classes
+-r -n --mode=c

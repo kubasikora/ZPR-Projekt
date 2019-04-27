@@ -10,9 +10,9 @@
 namespace zpr {
 
 class KeyDoNotExistsException : public std::exception {
-  public:
-    KeyDoNotExistsException(std::string key) : key(key) {}
-    std::string key;
+    public:
+        KeyDoNotExistsException(std::string key) : key(key) {}
+        std::string key;
 };
 
 std::string extractKeyFromPythonDict(const boost::python::dict& dict, std::string key);

@@ -5,7 +5,7 @@
 #include"controllers/SerializeDataController.hpp"
 #include"controllers/StateController.hpp"
 
-void initModule(){
+void initModule() {
 
 }
 

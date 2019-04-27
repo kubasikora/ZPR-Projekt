@@ -5,7 +5,7 @@
 
 namespace zpr {
 
-boost::python::dict SerializeDataController::getSerializedData(boost::python::dict& arguments){
+boost::python::dict SerializeDataController::getSerializedData(boost::python::dict& arguments) {
     this->statusCode = 400;
     boost::python::dict dictionary;
     dictionary["message"] = "Not implemented yet";

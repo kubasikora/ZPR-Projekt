@@ -1,17 +1,23 @@
 from flask import Flask, Response, request
 from config import DevConfig, ProdConfig
 from scada import MeasurementController, SerializeDataController, StateController
-import os
+import os, sys
 import json
 
 app = Flask(__name__)
-if os.environ.get("DEBUG"):
-    app.config.from_object(DevConfig)
+if len(sys.argv) > 1 and sys.argv[1] == '-d':
+    Config = DevConfig()
 else:
-    app.config.from_object(ProdConfig)
+    Config = ProdConfig()
 
-with open(app.config['DB_PASS']) as db_pass:
-	db = json.load(db_pass)
+db = {
+    "host": Config.DB_HOST,
+    "user": Config.DB_USER,
+    "password": Config.DB_PASSWORD,
+    "port": Config.DB_PORT
+}
+
+app.config.from_object(Config)
 
 @app.route('/measurement', methods = ['POST'])
 def measurement():

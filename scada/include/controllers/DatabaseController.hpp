@@ -7,14 +7,14 @@
 namespace zpr {
 
 class DatabaseController {
-  public:
-    DatabaseController(boost::python::dict& env);
-    
-  protected:
-    std::string host;
-    std::string user;
-    std::string password;
-    std::string port;
+    public:
+        DatabaseController(boost::python::dict& env);
+
+    protected:
+        std::string host;
+        std::string user;
+        std::string password;
+        std::string port;
 };
 
 }

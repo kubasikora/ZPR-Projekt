@@ -13,15 +13,15 @@ Measurement::Measurement() : Entity(0) {
 
 }
 
-Measurement::Measurement(const std::string id, 
-            const std::string value, 
-            const std::string timestamp, 
-            const std::string deviceId) : Entity(std::stoi(id)) {
+Measurement::Measurement(const std::string id,
+                         const std::string value,
+                         const std::string timestamp,
+                         const std::string deviceId) : Entity(std::stoi(id)) {
     this->value = std::stod(value);
     this->timestamp = timestampToPTime(timestamp);
     this->deviceId = std::stoi(deviceId);
 }
-    
+
 
 Measurement::Measurement(const boost::python::dict& request) : Entity(0) {
     this->value = std::stod(extractKeyFromPythonDict(request, "value").c_str());
