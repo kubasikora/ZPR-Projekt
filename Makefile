@@ -33,7 +33,11 @@ rest_test:
 client_test:
 	cd $(PWD)/client && npm test
 
+cpp_test:
+	./scada/__tests__/scada_test
+
 test:
+	./scada/__tests__/scada_test
 	pytest --ignore=scada
 	newman run ZPR.postman_collection.json 
 	cd $(PWD)/client && npm test 

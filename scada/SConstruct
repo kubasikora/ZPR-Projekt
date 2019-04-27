@@ -17,17 +17,20 @@ if(platform.system() == "Linux"):
     e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
     e.Append( LINKFLAGS = '-Wall -pthread' )
     e.Append( CPPPATH = ['/usr/include/python3.6', 
+                         '/usr/include',
                          'libs/boost', 
                          'libs/pqxx/install',
                          INCLUDE_DIR] )
 
-    e.Append( LIBPATH = ['/usr/lib/python3.6',
-                         'libs/boost',
-                         'libs/boost/stage',
-                         'libs/boost/stage/lib',
+    e.Append( LIBPATH = ['.',
+                         '/usr/lib/python3.6',
+                         '/usr/lib',
+                         #'libs/boost',
+                         #'libs/boost/stage',
+                         #'libs/boost/stage/lib',
                          'libs/pqxx/install/lib'] )
 
-    e.Append( LIBS = [ 'boost_python36', 'boost_date_time', 'pqxx' ] )
+    e.Append( LIBS = [ 'boost_python36', 'boost_system', 'boost_date_time', 'pqxx' ] )
 
     target = 'scada.so'
 
@@ -46,6 +49,18 @@ else:
 
 dll = e.SharedLibrary(target = 'scada', source = sources)
 
+
+#build tests
+env_test = e.Clone()
+
+if(platform.system() == "Linux"):
+   env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
+   #env_test.Prepend( LIBS = 'scada' )
+
+elif(platform.system() == "Windows"):
+   env_test.Prepend( LIBS = 'scada' )
+
+env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
 
 
 
