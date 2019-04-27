@@ -14,6 +14,7 @@ double StateController::getValue(int deviceId){
 
 boost::python::dict StateController::getState(){
     StateService* state = StateService::getInstance();
+    this->statusCode = 200;
     return state->mapToPythonDict();
 }
 

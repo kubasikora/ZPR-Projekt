@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c69d239e-b7d2-42d4-8b75-8ed0ae35722c",
+		"_postman_id": "3980f4c9-7dff-429d-973e-b97b9609d90b",
 		"name": "ZPR",
 		"description": "ZPR project\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -592,6 +592,52 @@
 							"port": "5000",
 							"path": [
 								"measurement"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Current state",
+			"item": [
+				{
+					"name": "Get current state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4beb376-9a33-4acd-9e60-9bb51f07d467",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correctly stores values\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1]).to.eql(34.5);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/state",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"state"
 							]
 						}
 					},
