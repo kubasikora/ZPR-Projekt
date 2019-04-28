@@ -1,4 +1,4 @@
-import platform, shutil
+import platform, shutil, os
 
 INCLUDE_DIR = "./include"
 BUILD_DIR = "./build/"
@@ -13,24 +13,35 @@ sources = [Glob(BUILD_DIR + '*.cpp'),
            Glob(BUILD_DIR + 'mappers/*.cpp'),
            Glob(BUILD_DIR + 'services/*.cpp')]
 
+BOOST_CPPPATH = os.environ['BOOST_CPPPATH']
+PQXX_CPPPATH = os.environ['PQXX_CPPPATH']
+PYTHON_CPPPATH = os.environ['PYTHON_CPPPATH']
+
+BOOST_LIBPATH = os.environ['BOOST_LIBPATH']
+PQXX_LIBPATH = os.environ['PQXX_LIBPATH']
+PYTHON_LIBPATH = os.environ['PYTHON_LIBPATH']
+
 if(platform.system() == "Linux"):
     e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
     e.Append( LINKFLAGS = '-Wall -pthread' )
-    e.Append( CPPPATH = ['/usr/include/python3.6', 
-                         '/usr/include',
-                         'libs/boost', 
-                         'libs/pqxx/install',
-                         INCLUDE_DIR] )
 
+
+    e.Append( CPPPATH = [INCLUDE_DIR,
+                         BOOST_CPPPATH,
+                         PQXX_CPPPATH,
+                         PYTHON_CPPPATH] )
+
+
+    
     e.Append( LIBPATH = ['.',
-                         '/usr/lib/python3.6',
-                         '/usr/lib',
-                         #'libs/boost',
-                         #'libs/boost/stage',
-                         #'libs/boost/stage/lib',
-                         'libs/pqxx/install/lib'] )
+                         BOOST_LIBPATH,
+                         PQXX_LIBPATH,
+                         PYTHON_LIBPATH] )
+                         
 
-    e.Append( LIBS = [ 'boost_python36', 'boost_system', 'boost_date_time', 'pqxx' ] )
+    e.Append( LIBS = [ 'boost_python36', 
+        # 'boost_system', 
+    'boost_date_time', 'pqxx' ] )
 
     target = 'scada.so'
 
@@ -39,10 +50,11 @@ elif(platform.system() == "Windows"):
     e = Environment()
 
     e.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD' )
-    e.Append( CPPPATH = [ 'c:/Boost/include/boost-1_63', 'C:/Python27/include' ] )
-    e.Append( LIBPATH = [ 'C:/Boost/lib', 'C:/Python27/libs' ] )
 
-    target = 'hello.pyd'
+    e.Append( CPPPATH = [ BOOST_CPPPATH, PQXX_CPPPATH, PYTHON_CPPPATH ] )
+    e.Append( LIBPATH = [ BOOST_LIBPATH, PQXX_LIBPATH, PYTHON_LIBPATH ] )
+
+    target = 'scada.pyd'
     
 else:
     print platform.system() + " not supported"
@@ -55,8 +67,7 @@ env_test = e.Clone()
 
 if(platform.system() == "Linux"):
    env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
-   #env_test.Prepend( LIBS = 'scada' )
-
+   
 elif(platform.system() == "Windows"):
    env_test.Prepend( LIBS = 'scada' )
 

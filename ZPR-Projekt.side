@@ -1,0 +1,68 @@
+{
+  "id": "da51583b-b16f-49c3-95c0-af11a383f7d5",
+  "version": "2.0",
+  "name": "ZPR-Projekt",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "50d1649a-c375-4056-8680-812725b9408f",
+    "name": "Example test",
+    "commands": [{
+      "id": "6ea9b8a2-cdef-4b7f-81ea-37002f367d14",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "877b0faf-d3a0-48d1-b1c3-655e7db5cca5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "751x722",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "67c9258c-24a0-431c-98ff-302997248c6a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.App-header",
+      "targets": [
+        ["css=.App-header", "css:finder"],
+        ["xpath=//div[@id='root']/div/header", "xpath:idRelative"],
+        ["xpath=//header", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "182ec90f-6b4e-4e51-9b52-e737985be12b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.App-header",
+      "targets": [
+        ["css=.App-header", "css:finder"],
+        ["xpath=//div[@id='root']/div/header", "xpath:idRelative"],
+        ["xpath=//header", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a9b29f6-7efc-45f0-9eb5-ea4e7f2b2f99",
+      "comment": "",
+      "command": "click",
+      "target": "css=.App-header",
+      "targets": [
+        ["css=.App-header", "css:finder"],
+        ["xpath=//div[@id='root']/div/header", "xpath:idRelative"],
+        ["xpath=//header", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "fbc57228-ceeb-40c4-84db-2f820768bc9e",
+    "name": "Login page tests",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["50d1649a-c375-4056-8680-812725b9408f"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}

@@ -1,4 +1,4 @@
-"""@package docstring
+"""
 Moduł konfiguracji aplikacji. Określa sposób w jaki działa
 serwer aplikacji. Klasy ProdConfig i DevConfig pobierają ze zmiennych 
 środowiskowych inforamcję na temat bazy danych.
