@@ -1,7 +1,9 @@
 #include<memory>
 #include<map>
 
+#define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
+#include<boost/python/dict.hpp>
 #include"controllers/StateController.hpp"
 #include"services/StateService.hpp"
 

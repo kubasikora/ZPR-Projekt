@@ -1,17 +1,9 @@
 import platform, shutil, os
 
-INCLUDE_DIR = "./include"
-BUILD_DIR = "./build/"
-SRC_DIR = "./src/"
-
-VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-e = Environment(TARGET_ARCH='x86')
-
-sources = [Glob(BUILD_DIR + '*.cpp'),
-           Glob(BUILD_DIR + 'utilities/*.cpp'), 
-           Glob(BUILD_DIR + 'controllers/*.cpp'),
-           Glob(BUILD_DIR + 'mappers/*.cpp'),
-           Glob(BUILD_DIR + 'services/*.cpp')]
+def copyLibBuilder( target, source, env):
+   '''kopiuje biblioteke'''
+   shutil.copy( str(source[0]), str(target[0]) )
+   return
 
 BOOST_CPPPATH = os.environ['BOOST_CPPPATH']
 PQXX_CPPPATH = os.environ['PQXX_CPPPATH']
@@ -22,10 +14,20 @@ PQXX_LIBPATH = os.environ['PQXX_LIBPATH']
 PYTHON_LIBPATH = os.environ['PYTHON_LIBPATH']
 
 if(platform.system() == "Linux"):
+    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
+    e = Environment(TARGET_ARCH='x86')
+
+    INCLUDE_DIR = "./include"
+    BUILD_DIR = './build/'
+    SRC_DIR = "./src"
+    sources = [Glob(BUILD_DIR + '*.cpp'),
+               Glob(BUILD_DIR + 'utilities\\*.cpp'), 
+               Glob(BUILD_DIR + 'controllers\\*.cpp'),
+               Glob(BUILD_DIR + 'mappers\\*.cpp'),
+               Glob(BUILD_DIR + 'services\\*.cpp')]
+
     e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
     e.Append( LINKFLAGS = '-Wall -pthread' )
-
-
     e.Append( CPPPATH = [INCLUDE_DIR,
                          BOOST_CPPPATH,
                          PQXX_CPPPATH,
@@ -46,22 +48,31 @@ if(platform.system() == "Linux"):
     target = 'scada.so'
 
 elif(platform.system() == "Windows"):
-    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-    e = Environment()
+    e = Environment(TARGET_ARCH='x86')
 
     e.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD' )
 
-    e.Append( CPPPATH = [ BOOST_CPPPATH, PQXX_CPPPATH, PYTHON_CPPPATH ] )
-    e.Append( LIBPATH = [ BOOST_LIBPATH, PQXX_LIBPATH, PYTHON_LIBPATH ] )
+    INCLUDE_DIR = '.\\include'
+    sources = ['src/main.cpp', 'src/controllers/StateController.cpp', 'src/services/StateService.cpp']
 
-    target = 'scada.pyd'
+    e.Append( CPPPATH = [ INCLUDE_DIR, BOOST_CPPPATH, 
+    #PQXX_CPPPATH, 
+    PYTHON_CPPPATH ] )
+    e.Append( LIBPATH = [ BOOST_LIBPATH, 
+    #PQXX_LIBPATH, 
+    PYTHON_LIBPATH ] )
+
+    e.Append(LIBS = ['boost_python36-vc141-mt-x32-1_69', 'boost_date_time-vc141-mt-x32-1_69'])
+
+    target = 'libscada.pyd'
     
 else:
-    print platform.system() + " not supported"
+    print(platform.system() + " not supported")
 
 dll = e.SharedLibrary(target = 'scada', source = sources)
+e.Command(target, dll, copyLibBuilder)
 
-
+"""
 #build tests
 env_test = e.Clone()
 
@@ -72,6 +83,4 @@ elif(platform.system() == "Windows"):
    env_test.Prepend( LIBS = 'scada' )
 
 env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
-
-
-
+"""
