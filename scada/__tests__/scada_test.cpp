@@ -2,11 +2,15 @@
    scada library tests
    defines 'main' for cpp unit test
 **/
-
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MAIN
 
-#include <boost/test/unit_test.hpp>
+#ifdef __unix__              
+    #include <boost/test/unit_test.hpp>
+#elif defined(_WIN32) || defined(WIN32)
+    #include <boost/test/included/unit_test.hpp>
+#endif
+
 #include "controllers/StateController.hpp"
 
 using namespace boost;

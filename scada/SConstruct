@@ -72,15 +72,15 @@ else:
 dll = e.SharedLibrary(target = 'scada', source = sources)
 e.Command(target, dll, copyLibBuilder)
 
-"""
+
 #build tests
 env_test = e.Clone()
 
 if(platform.system() == "Linux"):
-   env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
+    env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
+    env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
    
 elif(platform.system() == "Windows"):
-   env_test.Prepend( LIBS = 'scada' )
-
-env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
-"""
+    env_test.Append( LIBS = [ 'scada', 'boost_unit_test_framework-vc141-mt-x32-1_69'] )
+    env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
+   
