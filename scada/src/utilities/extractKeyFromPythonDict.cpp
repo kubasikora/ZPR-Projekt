@@ -1,4 +1,5 @@
 #include<string>
+#define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
 
 #include"utilities/utilities.hpp"

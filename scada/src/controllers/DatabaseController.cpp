@@ -1,4 +1,7 @@
+#define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
+#include<boost/python/dict.hpp>
+
 #include"controllers/DatabaseController.hpp"
 #include"utilities/utilities.hpp"
 

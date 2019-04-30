@@ -14,17 +14,19 @@ PQXX_LIBPATH = os.environ['PQXX_LIBPATH']
 PYTHON_LIBPATH = os.environ['PYTHON_LIBPATH']
 
 if(platform.system() == "Linux"):
-    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-    e = Environment(TARGET_ARCH='x86')
 
     INCLUDE_DIR = "./include"
     BUILD_DIR = './build/'
     SRC_DIR = "./src"
+
+    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
+    e = Environment(TARGET_ARCH='x86')
+
     sources = [Glob(BUILD_DIR + '*.cpp'),
-               Glob(BUILD_DIR + 'utilities\\*.cpp'), 
-               Glob(BUILD_DIR + 'controllers\\*.cpp'),
-               Glob(BUILD_DIR + 'mappers\\*.cpp'),
-               Glob(BUILD_DIR + 'services\\*.cpp')]
+               Glob(BUILD_DIR + 'utilities/*.cpp'), 
+               Glob(BUILD_DIR + 'controllers/*.cpp'),
+               Glob(BUILD_DIR + 'mappers/*.cpp'),
+               Glob(BUILD_DIR + 'services/*.cpp')]
 
     e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
     e.Append( LINKFLAGS = '-Wall -pthread' )
@@ -48,39 +50,36 @@ if(platform.system() == "Linux"):
     target = 'scada.so'
 
 elif(platform.system() == "Windows"):
-    SRC_DIR = ".\\src"
+    e = Environment(TARGET_ARCH='x86')
+
+    e.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD' )
+
     INCLUDE_DIR = '.\\include'
     BUILD_DIR = '.\\build'
-    
-    e = Environment(TARGET_ARCH='x86')
-    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-    e.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD /EXPORTS' )
-    e.Append( LINKFLAGS = ' /MACHINE:x86 /NOENTRY ' )
+    SRC_DIR = '.\\src'
+    sources = ['src\\main.cpp' , 
+                'src\\controllers\\DatabaseController.cpp',
+                'src\\controllers\\MeasurementController.cpp',
+                'src\\controllers\\SerializeDataController.cpp',
+                'src\\controllers\\StateController.cpp',
+                'src\\mappers\\Device.cpp',
+                'src\\mappers\\Measurement.cpp',                
+                'src\\services\\PostgreSQLService.cpp',
+                'src\\services\\StateService.cpp',
+                'src\\utilities\\extractKeyFromPythonDict.cpp',
+                'src\\utilities\\pTimeToTimestamp.cpp',
+                'src\\utilities\\timestampToPTime.cpp']
 
-    
-    sources = [Glob(BUILD_DIR + '*.cpp'),
-               Glob(BUILD_DIR + 'utilities\\*.cpp'), 
-               Glob(BUILD_DIR + 'controllers\\*.cpp'),
-               Glob(BUILD_DIR + 'mappers\\*.cpp'),
-               Glob(BUILD_DIR + 'services\\*.cpp')
-    ]
-   
-    e.Append( CPPPATH = [ INCLUDE_DIR, 
-                            BOOST_CPPPATH, 
-                            PQXX_CPPPATH, 
-                            PYTHON_CPPPATH 
-                            ] )
-    e.Append( LIBPATH = [   BOOST_LIBPATH, 
-                            PQXX_LIBPATH, 
-                            PYTHON_LIBPATH 
-                            ] )
+    e.Append( CPPPATH = [ INCLUDE_DIR, BOOST_CPPPATH, 
+        PQXX_CPPPATH, 
+        PYTHON_CPPPATH ] )
+    e.Append( LIBPATH = [ BOOST_LIBPATH, 
+        PQXX_LIBPATH, 
+        PYTHON_LIBPATH ] )
 
-    e.Append(LIBS = [
-        'libboost_python36-vc142-mt-x32-1_70', 
-        'libboost_date_time-vc142-mt-x32-1_70',
-        'libpqxx','libpq',
-        'python36'
-        ])
+    e.Append(LIBS = ['boost_python36-vc141-mt-x32-1_69', 'boost_date_time-vc141-mt-x32-1_69'
+    , 'libpqxx', 'libpq' 
+    ])
 
     target = 'libscada.pyd'
     
@@ -92,32 +91,13 @@ e.Command(target, dll, copyLibBuilder)
 
 
 #build tests
-env_test = Environment(TARGET_ARCH='x86')
+env_test = e.Clone()
 
 if(platform.system() == "Linux"):
-    env_test.Append( CPPPATH = [ INCLUDE_DIR, 
-                            BOOST_CPPPATH, 
-                            PQXX_CPPPATH, 
-                            PYTHON_CPPPATH 
-                            ] )
-    e.Append( LIBPATH = [   BOOST_LIBPATH, 
-                            PQXX_LIBPATH, 
-                            PYTHON_LIBPATH 
-                            ] )
     env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
     env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
    
 elif(platform.system() == "Windows"):
-    env_test.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD' )
-    env_test.Append( CPPPATH = [ INCLUDE_DIR, 
-                            BOOST_CPPPATH, 
-                            PQXX_CPPPATH, 
-                            PYTHON_CPPPATH 
-                            ] )
-    env_test.Append( LIBPATH = [  '.', BOOST_LIBPATH, 
-                            PQXX_LIBPATH, 
-                            PYTHON_LIBPATH 
-                            ] )                        
-    env_test.Append( LIBS = [ 'scada', 'libboost_unit_test_framework-vc142-mt-x32-1_70'] )
+    env_test.Append( LIBS = [ 'scada', 'boost_unit_test_framework-vc141-mt-x32-1_69'] )
     env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
    

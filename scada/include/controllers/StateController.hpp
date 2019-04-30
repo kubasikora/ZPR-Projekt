@@ -1,6 +1,7 @@
 #ifndef __STATE_CONTROLLER_HPP_
 #define __STATE_CONTROLLER_HPP_
 
+#define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
 #include"controllers/RESTServiceController.hpp"
 
