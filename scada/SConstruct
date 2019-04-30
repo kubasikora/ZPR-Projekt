@@ -14,17 +14,19 @@ PQXX_LIBPATH = os.environ['PQXX_LIBPATH']
 PYTHON_LIBPATH = os.environ['PYTHON_LIBPATH']
 
 if(platform.system() == "Linux"):
-    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
-    e = Environment(TARGET_ARCH='x86')
 
     INCLUDE_DIR = "./include"
     BUILD_DIR = './build/'
     SRC_DIR = "./src"
+
+    VariantDir(BUILD_DIR, SRC_DIR, duplicate=0)
+    e = Environment(TARGET_ARCH='x86')
+
     sources = [Glob(BUILD_DIR + '*.cpp'),
-               Glob(BUILD_DIR + 'utilities\\*.cpp'), 
-               Glob(BUILD_DIR + 'controllers\\*.cpp'),
-               Glob(BUILD_DIR + 'mappers\\*.cpp'),
-               Glob(BUILD_DIR + 'services\\*.cpp')]
+               Glob(BUILD_DIR + 'utilities/*.cpp'), 
+               Glob(BUILD_DIR + 'controllers/*.cpp'),
+               Glob(BUILD_DIR + 'mappers/*.cpp'),
+               Glob(BUILD_DIR + 'services/*.cpp')]
 
     e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
     e.Append( LINKFLAGS = '-Wall -pthread' )

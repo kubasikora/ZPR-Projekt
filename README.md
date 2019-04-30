@@ -99,7 +99,8 @@ Ostatecznie, przygotowano dodatkowe automatyczne testy aplikacji klienckiej przy
 do automatycznego testowania interfejsów graficznych, pozwalające na pisanie skryptów na podstawie których Selenium "udaje"
 użytkownika i "wyklikuje" przygotowane scenariusze. Nagrane scenariusze testowe zostały zapisane do pliku `ZPR-Projekt.side` 
 Aby uruchomić te testy należy wykonać polecenie `selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless]" ZPR-Projekt.side`.
-Argument `headless` pozwala na wykonywanie tych testów bez jawnego otwierania przeglądarki internetowej.
+Argument `headless` pozwala na wykonywanie tych testów bez jawnego otwierania przeglądarki internetowej. Przed uruchomieniem tego testu
+należy upenić się że serwer kliencki jest uruchomiony i pracuje na porcie `5000`.
 
 Dodatkowo, istnieje możliwość uruchomienia wszystkich testów równocześnie, przy pomocy prostego polecenie `make test`.
 
