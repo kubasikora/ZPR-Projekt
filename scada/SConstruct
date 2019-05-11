@@ -77,7 +77,8 @@ elif(platform.system() == "Windows"):
         PQXX_LIBPATH, 
         PYTHON_LIBPATH ] )
 
-    e.Append(LIBS = ['boost_python36-vc141-mt-x32-1_69', 'boost_date_time-vc141-mt-x32-1_69'
+    e.Append(LIBS = [
+       'libboost_python36-vc140-mt-x32-1_69', 'libboost_date_time-vc140-mt-x32-1_69'
     , 'libpqxx', 'libpq' 
     ])
 
@@ -89,15 +90,41 @@ else:
 dll = e.SharedLibrary(target = 'scada', source = sources)
 e.Command(target, dll, copyLibBuilder)
 
-
 #build tests
-env_test = e.Clone()
+env_test = Environment(TARGET_ARCH='x86')
+
 
 if(platform.system() == "Linux"):
+    INCLUDE_DIR = "./include"
+    BUILD_DIR = './build/'
+    SRC_DIR = "./src"
+
+    env_test.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
+    env_test.Append( LINKFLAGS = '-Wall -pthread' )
+    env_test.Append( CPPPATH = [INCLUDE_DIR,
+                         BOOST_CPPPATH,
+                         PQXX_CPPPATH,
+                         PYTHON_CPPPATH] )
+       
+    env_test.Append( LIBPATH = ['.',
+                         BOOST_LIBPATH,
+                         PQXX_LIBPATH,
+                         PYTHON_LIBPATH] )
+                         
     env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
     env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
    
 elif(platform.system() == "Windows"):
-    env_test.Append( LIBS = [ 'scada', 'boost_unit_test_framework-vc141-mt-x32-1_69'] )
+    INCLUDE_DIR = '.\\include'
+    BUILD_DIR = '.\\build'
+    SRC_DIR = '.\\src'
+    env_test.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 ' )
+    env_test.Append( CPPPATH = [ INCLUDE_DIR, BOOST_CPPPATH, 
+        PQXX_CPPPATH, 
+        PYTHON_CPPPATH ] )
+    env_test.Append( LIBPATH = [ BOOST_LIBPATH, 
+        PQXX_LIBPATH, 
+        PYTHON_LIBPATH ] )
+
+    env_test.Append( LIBS = [ 'scada', 'libboost_unit_test_framework-vc140-mt-x32-1_69'] )
     env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
-   
