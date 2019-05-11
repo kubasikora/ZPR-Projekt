@@ -1,9 +1,19 @@
 ifeq ($(OS), Windows_NT)
 	PWD = %CD%
 	OBJ = .obj
+	RM = del
+	RMR =del /S /Q
+	SO=pyd
+	SCADA_TEST_EXE = scada_test.exe
+	RUN_CPP_TEST = cd $(PWD)/scada/__tests__ && start $(SCADA_TEST_EXE)
 else
 	PWD = `pwd`
 	OBJ = .o
+	RM = rm
+	RMR = rm -rf
+	SO=so
+	SCADA_TEST_EXE = scada_test
+	RUN_CPP_TEST = ./scada/__tests__/scada_test
 endif
 
 
@@ -19,11 +29,10 @@ scada:
 	cd $(PWD)/scada && scons
 
 clean:
-	rm -rf scada/build/*
-	rm scada/libscada.so
-	rm -rf scada/__tests__/*.$(OBJ) 
-	rm scada/__tests__/scada_test
-
+	cd $(PWD)/scada/src && $(RMR) *$(OBJ)
+	cd $(PWD)/scada && $(RM) libscada.$(SO)
+	cd $(PWD)/scada/__tests__ && $(RMR) *$(OBJ) 
+	cd $(PWD)/scada/__tests__ && $(RM) $(SCADA_TEST_EXE)
 
 ## testing 
 
@@ -37,13 +46,12 @@ client_test:
 	cd $(PWD)/client && npm test
 
 cpp_test:
-	./scada/__tests__/scada_test
-
+	$(RUN_CPP_TEST)
 selenium_test:
 	selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless]" ZPR-Projekt.side
 
 test:
-	./scada/__tests__/scada_test
+	$(RUN_CPP_TEST)
 	pytest --ignore=scada
 	newman run ZPR.postman_collection.json 
 	cd $(PWD)/client && npm test 
