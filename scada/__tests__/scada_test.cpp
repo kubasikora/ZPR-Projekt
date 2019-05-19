@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE( creates_state_controller )
     zpr::SerializeDataController controller = zpr::SerializeDataController(db);
      
     controller.getSerializedData(arguments);
-    printf("OK100\n");
+  
     //auto controller = zpr::StateController();
 	BOOST_CHECK_EQUAL( 1, 1 );
 }
