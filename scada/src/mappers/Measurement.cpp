@@ -16,10 +16,10 @@ Measurement::Measurement() : Entity(0) {
 
 Measurement::Measurement(const std::string id,
                          const std::string value,
-                         const std::string timestamp,
+                          std::string timestamp,
                          const std::string deviceId) : Entity(std::stoi(id)) {
     this->value = std::stod(value);
-    this->timestamp = timestampToPTime(timestamp);
+    this->timestamp = timestampToPTime(validateDateFormat(timestamp));
     this->deviceId = std::stoi(deviceId);
 }
 
@@ -51,5 +51,28 @@ double Measurement::getValue() const {
 long Measurement::getDeviceId() const {
     return this->deviceId;
 }
+std::string Measurement::getTimestamp() const{
+    return boost::posix_time::to_simple_string(this->timestamp);
+}
+std::unique_ptr<std::vector<Measurement>> Measurement::mapToMeasurements(std::unique_ptr<std::vector<std::string>> stringVector){
+    std::unique_ptr<std::vector<Measurement>>measurementSet = std::make_unique<std::vector<Measurement>>();
+    for (unsigned i = 0; i < stringVector->size(); i=i+4) {
+                measurementSet->push_back(Measurement(stringVector->at(i), stringVector->at(i+1),stringVector->at(i+2),stringVector->at(i+3)));
+        }
+    return measurementSet;
+}
 
+const std::string Measurement::mapEntityToSQLSelect(const boost::python::dict& args){
+    std::string sql = "SELECT * FROM ";
+    sql+= tableName; 
+    sql+=" WHERE timestamp>'";
+    sql+= extractKeyFromPythonDict(args, "startTime").c_str();
+    sql+= "' AND timestamp<'";
+    sql+= extractKeyFromPythonDict(args, "stopTime").c_str();
+    sql+= "' AND device_id='";
+    sql+= extractKeyFromPythonDict(args, "deviceId").c_str();
+    sql+= "';";
+
+    return sql;
+}
 }

@@ -9,6 +9,7 @@ namespace zpr {
 boost::posix_time::ptime timestampToPTime(const std::string timestamp) {
     boost::posix_time::ptime timeObject = boost::posix_time::ptime();
     timeObject = boost::posix_time::time_from_string(timestamp);
+    std::cout<<timeObject<<std::endl;
     return timeObject;
 }
 

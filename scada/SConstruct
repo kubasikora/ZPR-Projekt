@@ -88,7 +88,8 @@ else:
     print(platform.system() + " not supported")
 
 dll = e.SharedLibrary(target = 'scada', source = sources)
-e.Command(target, dll, copyLibBuilder)
+if(platform.system() == "Windows"):
+    e.Command(target, dll, copyLibBuilder)
 
 #build tests
 env_test = Environment(TARGET_ARCH='x86')
@@ -99,7 +100,7 @@ if(platform.system() == "Linux"):
     BUILD_DIR = './build/'
     SRC_DIR = "./src"
 
-    env_test.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
+    env_test.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra -enable-debug' )
     env_test.Append( LINKFLAGS = '-Wall -pthread' )
     env_test.Append( CPPPATH = [INCLUDE_DIR,
                          BOOST_CPPPATH,
@@ -110,9 +111,15 @@ if(platform.system() == "Linux"):
                          BOOST_LIBPATH,
                          PQXX_LIBPATH,
                          PYTHON_LIBPATH] )
+    sources = ['__tests__/scada_test.cpp',
+               Glob(BUILD_DIR + '*.cpp'),
+               Glob(BUILD_DIR + 'utilities/*.cpp'), 
+               Glob(BUILD_DIR + 'controllers/*.cpp'),
+               Glob(BUILD_DIR + 'mappers/*.cpp'),
+               Glob(BUILD_DIR + 'services/*.cpp')]
                          
-    env_test.Append( LIBS = [ 'scada',  'python3.6m', 'boost_unit_test_framework'] )
-    env_test.Program( target = "__tests__/scada_test", source = '__tests__/scada_test.cpp')
+    env_test.Append( LIBS = [ 'scada', 'boost_python36','boost_date_time', 'python3.6m', 'boost_unit_test_framework','pqxx'] )
+    env_test.Program( target = "__tests__/scada_test", source = sources)
    
 elif(platform.system() == "Windows"):
     INCLUDE_DIR = '.\\include'

@@ -18,7 +18,7 @@ class KeyDoNotExistsException : public std::exception {
 std::string extractKeyFromPythonDict(const boost::python::dict& dict, std::string key);
 std::string pTimeToTimestamp(const boost::posix_time::ptime &time);
 boost::posix_time::ptime timestampToPTime(const std::string timestamp);
-
+std::string validateDateFormat(std::string timestamp);
 }
 
 #endif //__UTILITIES_HPP_

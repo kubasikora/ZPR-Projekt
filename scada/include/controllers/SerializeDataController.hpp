@@ -5,9 +5,10 @@
 #define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
 #include<boost/python/dict.hpp>
-
+#include<boost/python/tuple.hpp>
 #include"controllers/DatabaseController.hpp"
 #include"controllers/RESTServiceController.hpp"
+
 
 namespace zpr {
 

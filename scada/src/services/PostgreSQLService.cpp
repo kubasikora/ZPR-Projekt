@@ -20,7 +20,7 @@ std::unique_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::s
         std::unique_ptr<pqxx::work> worker = this->getWorker();
         pqxx::result resultDb = worker->exec(query);
         std::unique_ptr<std::vector<std::string>> resultSet = std::make_unique<std::vector<std::string>>();
-
+      
         const int columns = resultDb.columns();
 
         for (auto record = resultDb.begin(); record != resultDb.end(); ++record) {
