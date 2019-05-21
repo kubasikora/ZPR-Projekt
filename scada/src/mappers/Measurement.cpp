@@ -1,10 +1,12 @@
 #include"mappers/Measurement.hpp"
-#define BOOST_PYTHON_STATIC_LIB
-#include<boost/python.hpp>
-#include<boost/date_time.hpp>
 #include"utilities/utilities.hpp"
 #include<string>
 #include<sstream>
+
+#define BOOST_PYTHON_STATIC_LIB
+#include<boost/python.hpp>
+#include<boost/date_time.hpp>
+
 
 namespace zpr {
 

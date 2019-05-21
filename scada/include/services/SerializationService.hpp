@@ -5,6 +5,8 @@
 #include<memory>
 #include<string>
 #include<mappers/Measurement.hpp>
+
+#define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
 #include<boost/python/dict.hpp>
 namespace zpr {

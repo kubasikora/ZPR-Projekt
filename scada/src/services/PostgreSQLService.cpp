@@ -3,6 +3,7 @@
 #include<pqxx/pqxx>
 #include<iostream>
 
+#define BOOST_PYTHON_STATIC_LIB
 #include"services/DatabaseService.hpp"
 #include"services/PostgreSQLService.hpp"
 
@@ -30,7 +31,7 @@ std::unique_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::s
         }
 
         worker->commit();
-        this->connection->disconnect();
+        //this->connection->disconnect();
         return resultSet;
     }
     catch(pqxx::foreign_key_violation& ex) {

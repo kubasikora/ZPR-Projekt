@@ -1,16 +1,19 @@
 #include<string>
 #include<stdexcept>
 #include<vector>
+
+#include"controllers/SerializeDataController.hpp"
+#include"controllers/DatabaseController.hpp"
+#include"services/PostgreSQLService.hpp"
+#include"utilities/utilities.hpp"
+#include"mappers/Measurement.hpp"
+#include"services/SerializationService.hpp"
+
 #define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
 #include<boost/python/dict.hpp>
 #include<boost/python/tuple.hpp>
 
-#include"controllers/SerializeDataController.hpp"
-#include"services/PostgreSQLService.hpp"
-#include"utilities/utilities.hpp"
-#include"mappers/Measurement.hpp"
-#include"services/SerializationService.hpp"
 namespace zpr {
 
 boost::python::dict SerializeDataController::getSerializedData(boost::python::dict& arguments) {
