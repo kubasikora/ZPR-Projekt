@@ -21,9 +21,11 @@
 #include<iostream>
 #include<memory>
 
+#define BOOST_PYTHON_STATIC_LIB
 #include<boost/python.hpp>
 #include<boost/python/dict.hpp>
-#include<boost/python/tuple.hpp>
+#include<boost/python/extract.hpp>
+#include<boost/python/object.hpp>
 using namespace boost;
 using boost::unit_test::test_suite;
 
@@ -31,7 +33,8 @@ BOOST_AUTO_TEST_SUITE( scada_test )
 
 BOOST_AUTO_TEST_CASE( creates_state_controller )
 {
-    auto ptr = std::make_unique<python::dict>();
+    Py_Initialize();
+    boost::python::dict data;
     BOOST_CHECK_EQUAL( 1, 1 );
 }
 

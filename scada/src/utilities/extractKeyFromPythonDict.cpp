@@ -11,11 +11,11 @@
 namespace zpr {
 
 std::string extractKeyFromPythonDict(const boost::python::dict& dict, std::string key) {
-    //if(dict.has_key(key)) {
+    if(dict.has_key(key)) {
         boost::python::object keyValue = dict.get(key);
         return boost::python::extract<std::string>(keyValue);
-    //}
-    //else throw KeyDoNotExistsException(key);
+    }
+    else throw KeyDoNotExistsException(key);
 }
 
 }
