@@ -62,7 +62,7 @@ server/__tests__/__pycache__
 
 # testfiles
 .cache/
-scada/__tests__/scada_test
+server/scada/__tests__/scada_test
 
 # docs
 docs/doxygen/html/*

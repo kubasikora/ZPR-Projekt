@@ -5,7 +5,7 @@ ifeq ($(OS), Windows_NT)
 	RMR =del /S /Q
 	SO=pyd
 	SCADA_TEST_EXE = scada_test.exe
-	RUN_CPP_TEST = cd $(PWD)/scada/__tests__ && start $(SCADA_TEST_EXE)
+	RUN_CPP_TEST = cd $(PWD)/server/scada/__tests__ && start $(SCADA_TEST_EXE)
 else
 	PWD = `pwd`
 	OBJ = .o
@@ -13,7 +13,7 @@ else
 	RMR = rm -rf
 	SO=so
 	SCADA_TEST_EXE = scada_test
-	RUN_CPP_TEST = ./scada/__tests__/scada_test
+	RUN_CPP_TEST = ./server/scada/__tests__/scada_test
 endif
 
 
@@ -23,22 +23,22 @@ endif
 ## building
 
 all: 
-	cd $(PWD)/scada && scons
+	cd $(PWD)/server/scada && scons
 
 scada:
-	cd $(PWD)/scada && scons
+	cd $(PWD)/server/scada && scons
 
 clean:
-	$(RMR) ./scada/build
-	cd $(PWD)/scada/src && $(RMR) *$(OBJ)
-	cd $(PWD)/scada && $(RM) libscada.$(SO)
-	cd $(PWD)/scada/__tests__ && $(RMR) *$(OBJ) 
-	cd $(PWD)/scada/__tests__ && $(RM) $(SCADA_TEST_EXE)
+	$(RMR) ./server/scada/build
+	cd $(PWD)/server/scada/src && $(RMR) *$(OBJ)
+	cd $(PWD)/server/scada && $(RM) libscada.$(SO)
+	cd $(PWD)/server/scada/__tests__ && $(RMR) *$(OBJ) 
+	cd $(PWD)/server/scada/__tests__ && $(RM) $(SCADA_TEST_EXE)
 
 ## testing 
 
 python_test:
-	pytest --ignore=scada
+	pytest --ignore=server/scada
 
 rest_test:
 	newman run ZPR.postman_collection.json
@@ -54,7 +54,7 @@ selenium_test:
 
 test:
 	$(RUN_CPP_TEST)
-	pytest --ignore=scada
+	pytest --ignore=server/scada
 	newman run ZPR.postman_collection.json 
 	cd $(PWD)/client && npm test 
 	selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless]" ZPR-Projekt.side
@@ -63,7 +63,7 @@ test:
 ## misc
 
 lint:
-	astyle --project "scada/src/*.cpp" "scada/include/*.hpp"
+	astyle --project "server/scada/src/*.cpp" "server/scada/include/*.hpp"
 
 documentation:
 	doxygen
