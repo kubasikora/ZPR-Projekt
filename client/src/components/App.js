@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LoginPanel from "./LoginPanel"
 import MeasureGrid from "./MeasureGrid"
+import ParameterPanel from "./ParameterPanel"
 import axios from "axios";
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
         <header className="App-header"/>
         <LoginPanel/> 
         <MeasureGrid />
+        <ParameterPanel/>
       </div>
     );
   }

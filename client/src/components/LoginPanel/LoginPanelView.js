@@ -30,7 +30,6 @@ class LoginPanelView extends React.Component {
 
   }
   render() {
-    console.log(this.state);
     return (
       <Form className="login-form">
         <Form.Group controlId="formBasicEmail">
