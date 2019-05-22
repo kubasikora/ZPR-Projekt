@@ -29,6 +29,7 @@ scada:
 	cd $(PWD)/scada && scons
 
 clean:
+	$(RMR) ./scada/build
 	cd $(PWD)/scada/src && $(RMR) *$(OBJ)
 	cd $(PWD)/scada && $(RM) libscada.$(SO)
 	cd $(PWD)/scada/__tests__ && $(RMR) *$(OBJ) 
@@ -47,6 +48,7 @@ client_test:
 
 cpp_test:
 	$(RUN_CPP_TEST)
+
 selenium_test:
 	selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless]" ZPR-Projekt.side
 
