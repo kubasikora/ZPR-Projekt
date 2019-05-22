@@ -45,7 +45,7 @@ std::unique_ptr<std::vector<Measurement>> SerializationService::resample(std::un
         freq = floor(measurements->size()/this->maxSamples);
 
         for (int i = 1; i <= maxSamples; ++i){
-            resampledMeasurements->push_back(measurements->at(static_cast<int>(i*freq)));
+            resampledMeasurements->push_back(measurements->at(static_cast<int>(i*freq-1)));
         }
         return resampledMeasurements;
     }

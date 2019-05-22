@@ -38,7 +38,7 @@ clean:
 ## testing 
 
 python_test:
-	pytest --ignore=server/scada/__tests__
+	pytest --ignore=server/scada/__tests__ --ignore=scada/ "-s"
 
 rest_test:
 	newman run ZPR.postman_collection.json
