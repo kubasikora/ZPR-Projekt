@@ -45,10 +45,11 @@ if(platform.system() == "Linux"):
                          PQXX_LIBPATH,
                          PYTHON_LIBPATH] )
                          
-    e.Append( LIBS = [ 'boost_python36', 
+    e.Append( LIBS = [ 'libboost_python36', 
                        'boost_date_time', 
                        'pqxx',
-                       'python3.6m' ] )
+                      # 'python3.6m'
+                        ] )
 
     target = 'scada.so'
 
@@ -117,7 +118,9 @@ if(platform.system() == "Linux"):
     env_test = Environment(TARGET_ARCH='x86')
 
     sources = [Glob(TEST_SRC_DIR + '*.cpp'),
-               Glob(TEST_SRC_DIR + 'utilities/*.cpp')]
+               Glob(TEST_SRC_DIR + 'utilities/*.cpp'),
+               Glob(TEST_SRC_DIR + 'mappers/*.cpp'),
+               Glob(TEST_SRC_DIR + 'services/*.cpp')]
 
     env_test.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra -enable-debug' )
     env_test.Append( LINKFLAGS = '-Wall -pthread' )
@@ -144,7 +147,9 @@ if(platform.system() == "Linux"):
 elif(platform.system() == "Windows"):
     env_test = Environment(TARGET_ARCH='x86')
     test_sources = ['__tests__/scada_test.cpp'
-                    '__tests__/utilities/extractKeyFromPythonDict.test.cpp']
+                    '__tests__/utilities/extractKeyFromPythonDict.test.cpp',
+                    '__tests__/mappers/Measurement.test.cpp',
+                    '__tests__/mappers/Device.test.cpp']
 
     env_test.Append( CPPFLAGS = ' /EHsc /D "WIN32" /D "_WIN32_WINNT#0x501" /D "_CONSOLE" /W4 /MD /std:c++17' )
 
