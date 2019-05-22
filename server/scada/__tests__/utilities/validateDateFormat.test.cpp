@@ -32,4 +32,12 @@ BOOST_AUTO_TEST_CASE( shortensTooLongTimestamps )
     BOOST_CHECK_EQUAL(expectedTimestamp, validatedTimestamp);
 }
 
+BOOST_AUTO_TEST_CASE( removesTimezone )
+{
+    std::string timestamp = "2002-01-31 23:59:59+02";
+    std::string validatedTimestamp = zpr::validateDateFormat(timestamp);
+    std::string expectedTimestamp = "2002-01-31 23:59:59";
+    BOOST_CHECK_EQUAL(expectedTimestamp, validatedTimestamp);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

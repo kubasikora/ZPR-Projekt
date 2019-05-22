@@ -7,6 +7,11 @@ name = "pypi"
 flask = "*"
 "psycopg2" = "*"
 progress = "*"
+flask-sqlalchemy = "*"
+flask-httpauth = "*"
+passlib = "*"
+itsdangerous = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"
