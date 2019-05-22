@@ -37,15 +37,16 @@
 .vscode/
 
 # Scons build files
-scada/build/
-scada/libs/
-.sconsign.dblite
-scada/libscada.so
+server/scada/build/
+server/scada/libs/
+*.dblite
+server/scada/libscada.so
 
 # python files 
-scada/__pycache__/
+.pytest_cache/
+server/scada/__pycache__/
 __pycache__/
-__tests__/__pycache__
+server/__tests__/__pycache__
 *.pyc
 
 # latex files
