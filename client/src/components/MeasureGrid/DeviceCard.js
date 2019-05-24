@@ -3,17 +3,26 @@ import Card from "react-bootstrap/Card";
 
 
 const DeviceCard = props => {
-    let { value, name, serial } = props;
+    let { value, unit, name, description, serial } = props;
 
     return (
-        <Card style={{ width: "auto", backgroundColor: "#8093A0"  }}>
+        <Card style={{ width: "auto", backgroundColor: "#8093A0" }}>
             <Card.Body>
-                <Card.Title style={{color: "#2DC5C9", fontSize: "128px", textAlign: "left"}}>{value}</Card.Title>
-                <Card.Text style={{color: "white", fontSize: "32px", textAlign: "left"}}>
-                    {name}
+                <Card.Title style={{ color: "#2DC5C9", fontFamily: "Montserrat", fontSize: "128px", textAlign: "left" }}>
+                    {value} 
+                    <span style={{ color: "#2DC5C9", fontFamily: "Montserrat", fontSize: "64px", textAlign: "center", marginLeft: "5px" }}>
+                        {unit}
+                    </span>
+                </Card.Title>
+
+                <Card.Text style={{ color: "white", fontFamily: "Montserrat", fontSize: "32px", textAlign: "left" }}>
+                    {description}
                 </Card.Text>
-                <Card.Text style={{color: "lightgray", fontSize: "16px", textAlign: "left"}}>
+                <Card.Text style={{ color: "white", fontFamily: "Montserrat", fontSize: "20px", textAlign: "left" }}>
+                    {name}
+                    <div style={{ color: "lightgray", fontFamily: "Roboto Mono", fontSize: "16px", textAlign: "left" }}>
                     {serial}
+                    </div>
                 </Card.Text>
             </Card.Body>
         </Card>

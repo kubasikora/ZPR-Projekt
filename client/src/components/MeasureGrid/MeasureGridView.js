@@ -16,20 +16,40 @@ class MeasureGridView extends React.Component {
       <div>
         <Header />
         <Container>
-          <Row style={{marginTop: "8rem"}}>
+          <Row style={{marginTop: "5rem"}}>
             <Col sm={12} md={6} >
-            <DeviceCard value={23.45} name={"CS7 - Introl"} serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
+            <DeviceCard 
+              description={"Temperatura gazu"}
+              value={23.45} 
+              name={"CS7"} 
+              unit={"°C"} 
+              serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
             </Col>
             <Col sm={12} md={6} >
-            <DeviceCard />
+            <DeviceCard 
+              description={"Przepływ gazu"}
+              value={2330} 
+              name={"FLOMID XT5/XT5H"} 
+              unit={"l/h"} 
+              serial={"99e6c2cb-68a3-4f27-a289-5be85ce96669"}/>
             </Col>
           </Row>
           <Row style={{marginTop: "2rem"}}>
             <Col sm={12} md={6} >
-            <DeviceCard />
+            <DeviceCard 
+              description={"Ciśnienie w rurociągu"}
+              value={0.665} 
+              unit={"bar"} 
+              name={"ADZ-SML-10.0"} 
+              serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
             </Col>
             <Col sm={12} md={6} >
-            <DeviceCard />
+            <DeviceCard 
+              description={"Wilgotność gazu"}
+              value={35} 
+              unit={"%"} 
+              name={"AM2302"} 
+              serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
             </Col>
           </Row>
         </Container>
