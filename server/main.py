@@ -30,7 +30,7 @@ db = {
     "port": Config.DB_PORT
 }
 
-DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=Config.DB_USER, pw=Config.DB_PASSWORD, url=Config.DB_HOST ,db="zpr")
+DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=Config.DB_USER, pw=Config.DB_PASSWORD, url=Config.DB_HOST ,db=Config.DB_USER)
 
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
