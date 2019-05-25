@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import LoginPanel from "./LoginPanel"
 import MeasureGrid from "./MeasureGrid"
-import ParameterPanel from "./ParameterPanel"
 import axios from "axios";
-
+import Header from "./Header";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Serialization from './Serialization';
 class App extends Component {
 
   componentDidMount(){
@@ -20,10 +20,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {/*<LoginPanel/>*/}
-        <MeasureGrid />
-      </div>
+      <Router>
+        <Header />
+        <Switch>
+              <Route exact path='/' component={LoginPanel} />
+              <Route path='/home' component={MeasureGrid} />
+              <Route path='/figures' component={Serialization} />
+          </Switch>
+      </Router>
     );
   }
 }

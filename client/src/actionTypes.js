@@ -1,3 +1,6 @@
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_OK = 'LOGIN_OK'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const GET_DATA_START='GET_DATA_START'
+export const GET_DATA_OK= 'GET_DATA_OK'
+export const GET_DATA_ERROR= 'GET_DATA_ERROR'

@@ -1,5 +1,4 @@
 import React from "react"
-import Header from "../Header";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,7 +13,6 @@ class MeasureGridView extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <Container>
           <Row style={{marginTop: "5rem"}}>
             <Col sm={12} md={6} >

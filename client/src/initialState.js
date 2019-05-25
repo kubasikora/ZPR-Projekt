@@ -1,7 +1,7 @@
 const initialState= {
 
-logged : false
-
+logged : false,
+dataValid : false
 }
 
 export default initialState;
