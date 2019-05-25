@@ -1,10 +1,10 @@
 import React from "react"
-import Header from "../Header";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import DeviceCard from "./DeviceCard";
+import Header from "../Header";
 
 class MeasureGridView extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class MeasureGridView extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header/>
         <Container>
           <Row style={{marginTop: "5rem"}}>
             <Col sm={12} md={6} >

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import LoginPanel from "./LoginPanel"
 import MeasureGrid from "./MeasureGrid"
-import ParameterPanel from "./ParameterPanel"
+import Serialization from './Serialization';
 import Page404 from "./Page404";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-router-dom";
@@ -44,7 +43,7 @@ class App extends Component {
             <Switch>
             <Route path="/" exact component={LoginPanel} />
             <PrivateRoute path="/home" exact component={MeasureGrid} />
-            <PrivateRoute path="/figures" exact component={ParameterPanel} />
+            <PrivateRoute path="/figures" exact component={Serialization} />
             <Route component={Page404} />
           </Switch>
         </Router>

@@ -6,7 +6,7 @@ const LoginForm = props => {
     return (
         <Form className="login-form">
             <Form.Group controlId="formBasicEmail">
-                <Form.Label style={{fontWeight: "bold"}}>Login</Form.Label>
+                <Form.Label style={{fontWeight: "bold", display: "block", textAlign: "center"}}>Login</Form.Label>
                 <Form.Control type="login" placeholder="Wprowadź login" />
                 <Form.Text className="text-muted">
                     {props.info}
@@ -14,10 +14,10 @@ const LoginForm = props => {
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label style={{fontWeight: "bold"}}>Hasło</Form.Label>
+                <Form.Label style={{fontWeight: "bold", display: "block", textAlign: "center"}}>Hasło</Form.Label>
                 <Form.Control type="password" placeholder="Hasło" />
             </Form.Group>
-            <Button variant="primary" type="submit" style={{backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold"}}>
+            <Button variant="primary" type="submit" style={{backgroundColor: "#2DC5C9", width: "5rem", display: "block", margin: "auto", color: "black", fontWeight: "bold"}} href="/home">
                 Zaloguj
             </Button>
         </Form>)

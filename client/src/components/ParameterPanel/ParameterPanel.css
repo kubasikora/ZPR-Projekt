@@ -1,0 +1,27 @@
+
+.graphs{
+    width: 70%;
+    float: left
+}
+.parameter-side{
+    width: 33%;
+    height: 40%;
+    margin: 2%;
+    margin-top: 8%;
+    margin-right:4%;
+    padding: 2%;
+    background-color:#8093C1;
+    float: right;
+}
+.checkboxes{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.my-form-check{
+    margin-top: 2%
+}
+.my-form-check-label{
+    color: white;
+    font-family: Montserrat;
+    font-weight: bold;
+}

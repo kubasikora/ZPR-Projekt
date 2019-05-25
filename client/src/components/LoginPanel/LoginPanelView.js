@@ -43,7 +43,7 @@ class LoginPanelView extends React.Component {
           <Col md={8}>
             <Card style={{ width: "auto", margin: "10rem auto", backgroundColor: "#8093C1" }}>
               <Card.Body>
-                <img src="./logo.png" />
+                <img src="./logo.png" style={{display: "block", margin: "auto"}} />
                 <LoginForm />
               </Card.Body>
             </Card>
