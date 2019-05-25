@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import {Link} from "react-router-dom";
 
 class Header extends React.Component {
     constructor(props) {
@@ -10,10 +11,16 @@ class Header extends React.Component {
     }
 
     render() {
+        const navItemStyle={ 
+            textDecoration: 'none',
+            color: "white",
+            margin: "10px"
+        };
+
         return (
             <React.Fragment>
                 <Navbar variant="dark" style={{ backgroundColor: "#8093A0" }}>
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/home">
                         <img
                             alt=""
                             src="../logo.png"
@@ -23,9 +30,10 @@ class Header extends React.Component {
                         />
                         {' ZPR Projekt '}
                     </Navbar.Brand>
+
                     <Nav className="mr-auto">
-                        <Nav.Link href="/home">Dashboard</Nav.Link>
-                        <Nav.Link href="/figures">Serie danych</Nav.Link>
+                        <Link to="/home" style={navItemStyle}>Dashboard</Link>
+                        <Link to="/figures" style={navItemStyle}>Serie danych</Link>
                     </Nav>
 
                     <Navbar.Collapse className="justify-content-end">

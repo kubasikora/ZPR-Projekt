@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import {Dropdown, ButtonToolbar, Button} from "react-bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
+import Header from "../Header";
+
 class ParameterPanelView extends React.Component {
     constructor(props) {
       super(props);
@@ -29,7 +31,8 @@ class ParameterPanelView extends React.Component {
     render() {
         return (
             <div>
-                <ButtonToolbar>
+                <Header />
+                    <ButtonToolbar>
                     <Dropdown>
                         <Dropdown.Toggle id="dropdown-item-button">{this.state.device}</Dropdown.Toggle>
                         <Dropdown.Menu className="super-colors">

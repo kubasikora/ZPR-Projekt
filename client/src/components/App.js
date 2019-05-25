@@ -3,7 +3,26 @@ import './App.css';
 import LoginPanel from "./LoginPanel"
 import MeasureGrid from "./MeasureGrid"
 import ParameterPanel from "./ParameterPanel"
+import Page404 from "./Page404";
 import axios from "axios";
+import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-router-dom";
+
+
+const PrivateRoute = ({ component: Component, ...rest}) => {
+  let isAuthenticated = true;
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{pathname: "/", state: {from: props.location }}} />
+        )} 
+      />
+  )
+}
+
 
 class App extends Component {
 
@@ -21,8 +40,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*<LoginPanel/>*/}
-        <MeasureGrid />
+        <Router>  
+            <Switch>
+            <Route path="/" exact component={LoginPanel} />
+            <PrivateRoute path="/home" exact component={MeasureGrid} />
+            <PrivateRoute path="/figures" exact component={ParameterPanel} />
+            <Route component={Page404} />
+          </Switch>
+        </Router>
       </div>
     );
   }

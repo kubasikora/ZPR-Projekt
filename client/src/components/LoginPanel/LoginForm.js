@@ -7,18 +7,18 @@ const LoginForm = props => {
         <Form className="login-form">
             <Form.Group controlId="formBasicEmail">
                 <Form.Label style={{fontWeight: "bold"}}>Login</Form.Label>
-                <Form.Control type="email" placeholder="Enter login" />
+                <Form.Control type="login" placeholder="Wprowadź login" />
                 <Form.Text className="text-muted">
                     {props.info}
                 </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label style={{fontWeight: "bold"}}>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Label style={{fontWeight: "bold"}}>Hasło</Form.Label>
+                <Form.Control type="password" placeholder="Hasło" />
             </Form.Group>
             <Button variant="primary" type="submit" style={{backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold"}}>
-                Submit
+                Zaloguj
             </Button>
         </Form>)
 };
