@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onClick: (state) => {
+    getData: (state) => {
       dispatch(getData(state))
   }
  }

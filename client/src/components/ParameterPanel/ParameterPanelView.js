@@ -50,19 +50,6 @@ class ParameterPanelView extends React.Component {
         return (
             <div>
                 <Header />
-                <ButtonToolbar>
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdown-item-button">{this.state.device}</Dropdown.Toggle>
-                        <Dropdown.Menu className="super-colors">
-                            <Dropdown.Item as="button" eventKey="1">CS7</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="2">FLOMID XT5/XT5H</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="3" >ADZ-SML-10.0</Dropdown.Item>
-                            <Dropdown.Item as="button" eventKey="4">AM2302</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item as="button" eventKey="5">All devices</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </ButtonToolbar>
                 <div className="parameter-side">
                     <DatePicker
                         style={{ color: "white", fontFamily: "Montserrat" }}
