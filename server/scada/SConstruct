@@ -48,7 +48,7 @@ if(platform.system() == "Linux"):
     e.Append( LIBS = [ 'libboost_python36', 
                        'boost_date_time', 
                        'pqxx',
-                      # 'python3.6m'
+                       'python3.6m'
                         ] )
 
     target = 'scada.so'
