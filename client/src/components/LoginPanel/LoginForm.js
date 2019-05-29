@@ -9,7 +9,7 @@ const LoginForm = props => {
                 <Form.Label style={{fontWeight: "bold", display: "block", textAlign: "center"}}>Login</Form.Label>
                 <Form.Control id="login-form" type="login" placeholder="Wprowadź login" />
                 <Form.Text style={{marginLeft: "1vw", color: "#ff0000"}}>
-                    {props.info}
+                    {props.info === "" ? <br/> : props.info }
                 </Form.Text>
             </Form.Group>
 
@@ -17,12 +17,14 @@ const LoginForm = props => {
                 <Form.Label style={{fontWeight: "bold", display: "block", textAlign: "center"}}>Hasło</Form.Label>
                 <Form.Control id="password-form" type="password" placeholder="Hasło" />
             </Form.Group>
+            <br/>
             <Button variant="primary" 
+                    id="login-button"
                     style={{backgroundColor: "#2DC5C9", width: "5rem", display: "block", margin: "auto", color: "black", fontWeight: "bold"}}
                     onClick={() => {
                         const login = document.getElementById("login-form").value;
                         const password = document.getElementById("password-form").value;
-                        console.log(login + ":" + password);
+                        document.getElementById("password-form").value = "";
                         props.login(login, password)}}>
                 Zaloguj
             </Button>
