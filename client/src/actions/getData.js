@@ -4,23 +4,20 @@ import endpoint from "../index";
 
 function getData (state) {
  
-   return async dispatch =>{
-    try{
+  return dispatch => {
+   
       dispatch({type: GET_DATA_START});
       let args = {
         'startTime': state.startDate,
         'stopTime': state.endDate,
         'deviceId': state.checked[0]
       }
-      let response = axios.get(`${endpoint}/getSerializedData`, {params: args});
-      dispatch({type: GET_DATA_OK})
-
-    
-  }catch(err){
-    console.log(err)
-    dispatch({type: GET_DATA_ERROR})
-  }
- }
+      axios.get(`${endpoint}/getSerializedData`, {headers: {'Access-Control-Allow-Origin': '*'},params: args})
+      .then (response => {
+        dispatch({type: GET_DATA_OK, data: response.data.data});
+      })
+      .catch(error => dispatch({type: GET_DATA_OK}))
+     }
 }
 
 
