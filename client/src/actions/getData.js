@@ -1,18 +1,20 @@
 import {GET_DATA_START, GET_DATA_OK, GET_DATA_ERROR} from "../actionTypes"
 import axios from 'axios';
+import endpoint from "../index";
+
 function getData (state) {
+ 
    return async dispatch =>{
     try{
       dispatch({type: GET_DATA_START});
       let args = {
-        'startTime': state.startTime,
-        'stopTime': state.stopTime,
-        'deviceId': state.deviceId
+        'startTime': state.startDate,
+        'stopTime': state.endDate,
+        'deviceId': state.checked[0]
       }
-      let response = await(()=>axios.get("http://127.0.0.1:5000/getSerializedData", {args}));
-      console.log(response)
+      let response = axios.get(`${endpoint}/getSerializedData`, {params: args});
       dispatch({type: GET_DATA_OK})
-      console.log(response)
+
     
   }catch(err){
     console.log(err)

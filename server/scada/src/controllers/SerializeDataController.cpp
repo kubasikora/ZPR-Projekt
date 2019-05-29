@@ -18,7 +18,6 @@ namespace zpr {
 
 boost::python::dict SerializeDataController::getSerializedData(boost::python::dict& arguments) {
     try {
-        
         std::unique_ptr<std::vector<std::string>> dbResultSet = std::make_unique<std::vector<std::string>>();
         boost::python::dict result;
 

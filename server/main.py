@@ -23,7 +23,7 @@ else:
 
 app.config.from_object(Config)
 
-db = {
+db_config = {
     "host": Config.DB_HOST,
     "user": Config.DB_USER,
     "password": Config.DB_PASSWORD,
@@ -114,7 +114,7 @@ def login():
 @app.route('/measurement', methods = ['POST'])
 @auth.login_required
 def measurement():
-    controller = MeasurementController(db)
+    controller = MeasurementController(db_config)
     response = controller.postNewMeasurement(request.form)
     statusCode = controller.getStatusCode()
     return Response(response=response, status=statusCode)
@@ -122,7 +122,7 @@ def measurement():
 @app.route('/getSerializedData', methods = ['GET'])
 @auth.login_required
 def getSerializedData():
-    controller = SerializeDataController(db)
+    controller = SerializeDataController(db_config)
     response = json.dumps(controller.getSerializedData(request.args))
     statusCode = controller.getStatusCode()
     return Response(response=response, status=statusCode)

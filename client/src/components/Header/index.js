@@ -1,9 +1,10 @@
 import React from "react";
+import { connect } from 'react-redux';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import {Link} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class Header extends React.Component {
     constructor(props) {
@@ -16,6 +17,10 @@ class Header extends React.Component {
             color: "white",
             margin: "10px"
         };
+
+        const login = localStorage.getItem('username');
+
+        if(!login) return <Redirect to="/" />
 
         return (
             <React.Fragment>
@@ -47,7 +52,10 @@ class Header extends React.Component {
                                         Wyloguj
                                     </Tooltip>
                                 }>
-                                <a href="/">admin</a>
+                                <a href="/" onClick={() => {
+                                    localStorage.removeItem('username');
+                                    localStorage.removeItem('basicAuth');
+                                }}>{login}</a>
                             </OverlayTrigger>
                         </Navbar.Text>
                     </Navbar.Collapse>
@@ -56,5 +64,21 @@ class Header extends React.Component {
         );
     }
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    login: state.auth.login
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+  }
+}
+
+const LoginPanel = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header)
 
 export default Header;

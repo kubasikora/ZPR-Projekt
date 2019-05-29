@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd server && python main.py&
+cd server && python main.py -d&
 PIDPY=$!
 
 cd client && npm start&
