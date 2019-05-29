@@ -15,7 +15,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 if len(sys.argv) > 1 and sys.argv[1] == '-d':
-    AUTH = True
+    AUTH = False
     Config = DevConfig()
 else:
     AUTH = True

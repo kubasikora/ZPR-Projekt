@@ -45,7 +45,7 @@ if(platform.system() == "Linux"):
                          PQXX_LIBPATH,
                          PYTHON_LIBPATH] )
                          
-    e.Append( LIBS = [ 'libboost_python36', 
+    e.Append( LIBS = [ 'boost_python36', 
                        'boost_date_time', 
                        'pqxx',
                        'python3.6m'
