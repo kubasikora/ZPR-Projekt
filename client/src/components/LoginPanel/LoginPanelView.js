@@ -3,8 +3,7 @@ import Card from "react-bootstrap/Card";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-
+import { Redirect } from 'react-router-dom';
 import LoginForm from "./LoginForm";
 
 
@@ -12,30 +11,25 @@ import "./LoginPanel.css"
 class LoginPanelView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      login: "",
-      password: ""
-    }
-    this.changeLogin = this.changeLogin.bind(this);
-    this.changePassword = this.changePassword.bind(this);
-    this.onButtonClick = this.onButtonClick.bind(this);
   }
 
-  changeLogin(e) {
-    this.setState({ login: e.target.value })
-
-  }
-  changePassword(e) {
-    this.setState({ password: e.target.value })
-
-  }
-
-  onButtonClick(e) {
-    e.preventDefault();
-    this.props.onClick(this.state.login, this.state.password);
-
-  }
   render() {
+    const basicAuth = localStorage.getItem('basicAuth');
+    if(basicAuth){
+      return <Redirect to="/home" />
+    }
+
+    let infoText = " ";
+    if(this.props.error){
+      switch(this.props.error.response.status){
+        case 401:
+          infoText = "Login lub hasło są błędne. Proszę spróbuj ponownie";
+          break;
+        case 500:
+          infoText = "Wystąpił bład serwera. Proszę spróbuje ponownie później";
+      }
+    }
+
     return (
       <Container>
         <Row>
@@ -43,8 +37,8 @@ class LoginPanelView extends React.Component {
           <Col md={8}>
             <Card style={{ width: "auto", margin: "10rem auto", backgroundColor: "#8093C1" }}>
               <Card.Body>
-                <img src="./logo.png" style={{display: "block", margin: "auto"}} />
-                <LoginForm />
+                <img src="./logo.png" style={{ display: "block", margin: "auto" }} />
+                <LoginForm info={infoText} login={(login, password) => this.props.authenticate(login, password)} />
               </Card.Body>
             </Card>
 
@@ -56,6 +50,5 @@ class LoginPanelView extends React.Component {
     );
   }
 }
-
 
 export default LoginPanelView;

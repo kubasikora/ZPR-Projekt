@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
 import LoginPanelView from './LoginPanelView'
-import loginStart from "../../actions/loginStart"
+import authenticate from "../../actions/authenticate";
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    
+    error: state.auth.error
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onClick: (login, password) => {
-      dispatch(loginStart(login, password))
-    }
+      authenticate: (login, password) => dispatch(authenticate(login, password))
   }
 }
 

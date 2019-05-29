@@ -38,7 +38,7 @@ class ParameterPanelView extends React.Component {
         let value = e.target.value;
         let newArray = this.state.checked;
         if (this.state.checked.includes(value)) {
-            newArray = newArray.filter(element => { return element != value });
+            newArray = newArray.filter(element => { return element !== value });
         }
         else {
             newArray.push(value);

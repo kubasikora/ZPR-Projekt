@@ -1,8 +1,9 @@
-import {LOGIN_START, LOGIN_OK, LOGIN_ERROR} from "../actionTypes"
+import { LOGIN_START } from "../actionTypes"
 
- function loginStart(login, password) {
-    return { type: LOGIN_OK 
+const loginStart = () => {
+    return {
+        type: LOGIN_START
     }
-  }
+}
 
 export default loginStart;
