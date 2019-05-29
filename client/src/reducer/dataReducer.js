@@ -6,8 +6,9 @@ import {
 } from "../actionTypes"
 
 const reducers = (state = initialState, action) => {
+    console.log(state,action)
     switch (action.type) {
-
+        
         case GET_DATA_START:
             return {
                 ...state,
@@ -18,7 +19,8 @@ const reducers = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                data: action.data
+                data: [...state.data,
+                     action.data]
             }
         case GET_DATA_ERROR:
             return {
