@@ -13,13 +13,23 @@ class LoginPanelView extends React.Component {
     super(props);
   }
 
+  componentDidMount(){
+    const buttonId = "login-button";
+    document.addEventListener("keyup", event => {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.getElementById(buttonId).click();
+      }
+    });
+  }
+
   render() {
     const basicAuth = localStorage.getItem('basicAuth');
     if(basicAuth){
       return <Redirect to="/home" />
     }
 
-    let infoText = " ";
+    let infoText = "";
     if(this.props.error){
       switch(this.props.error.response.status){
         case 401:
