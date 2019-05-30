@@ -79,5 +79,4 @@ BOOST_AUTO_TEST_CASE( MapsEntityToSQLInsert )
     BOOST_CHECK_EQUAL(measurement.mapEntityToSQLInsert(), properInsert);
 }
 
-
 BOOST_AUTO_TEST_SUITE_END()

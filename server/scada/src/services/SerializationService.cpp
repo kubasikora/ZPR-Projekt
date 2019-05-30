@@ -15,7 +15,7 @@
 
 namespace zpr {
 
-const int SerializationService::maxSamples = 100;
+const int SerializationService::maxSamples = 163;
 
     
 

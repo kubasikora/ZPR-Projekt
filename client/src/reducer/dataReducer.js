@@ -5,8 +5,7 @@ import {
     GET_DATA_OK
 } from "../actionTypes"
 
-const reducers = (state = initialState, action) => {
-    console.log(state,action)
+const reducers = (state = initialState.data, action) => {
     switch (action.type) {
         
         case GET_DATA_START:

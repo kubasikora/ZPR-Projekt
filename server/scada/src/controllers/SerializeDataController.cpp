@@ -26,7 +26,7 @@ boost::python::dict SerializeDataController::getSerializedData(boost::python::di
         
         std::unique_ptr<std::vector<Measurement>>measurementSet = std::make_unique<std::vector<Measurement>>();
         measurementSet = Measurement::mapToMeasurements(std::move(dbResultSet));
-    
+        
         SerializationService serializationService;
         result = serializationService.mapToPythonDict(std::move(measurementSet));
 

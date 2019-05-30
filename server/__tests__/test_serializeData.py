@@ -30,4 +30,4 @@ def test_handler_is_a_teapot_before_handling_request():
 def test_getting_data():
     controller = SerializeDataController(db)
     response = controller.getSerializedData(valid_request_form)
-    #print(len(response["data"]))
+    print((response["data"]))

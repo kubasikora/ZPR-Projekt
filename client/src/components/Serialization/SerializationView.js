@@ -14,11 +14,10 @@ class SerializationView extends React.Component {
     render() {
         return (
             <div className="serialization-panel">
+                <ParameterPanel />
             <div className="graphs">
-            {this.props.dataValid? <Graphs />: null}
+            {!this.props.loading? <Graphs/>: null}
             </div>
-           
-            <ParameterPanel />
         </div>
         )
   }

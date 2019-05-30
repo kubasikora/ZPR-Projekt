@@ -3,7 +3,7 @@ import SerializationView from './SerializationView'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dataValid : state.dataValid
+    loading : state.data.loading,
   }
 }
 

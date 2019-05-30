@@ -1,7 +1,11 @@
 const initialState = {
     auth: {
         login: null,
-        password: null
+        password: null,
+    },
+    data: {
+        loading: true,
+        data: [],
     }
 }
 
