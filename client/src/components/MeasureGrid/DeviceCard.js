@@ -6,11 +6,11 @@ const DeviceCard = props => {
     let { value, unit, name, description, serial } = props;
 
     return (
-        <Card style={{ width: "auto", backgroundColor: "#8093A0" }}>
+        <Card style={{ width: "auto", backgroundColor: "#8093A0", marginBottom: "3vh" }}>
             <Card.Body>
-                <Card.Title style={{ color: "#2DC5C9", fontFamily: "Montserrat", fontSize: "128px", textAlign: "left" }}>
+                <Card.Title style={{ color: "#2DC5C9", fontFamily: "Montserrat", fontSize: "120px", textAlign: "left" }}>
                     {value} 
-                    <span style={{ color: "#2DC5C9", fontFamily: "Montserrat", fontSize: "64px", textAlign: "center", marginLeft: "5px" }}>
+                    <span style={{ color: "#2DC5C9", fontFamily: "Montserrat", fontSize: "32px", textAlign: "center" }}>
                         {unit}
                     </span>
                 </Card.Title>

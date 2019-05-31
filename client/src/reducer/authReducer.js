@@ -5,7 +5,7 @@ import {
     LOGIN_ERROR
 } from "../actionTypes"
 
-const reducers = (state = initialState, action) => {
+const reducers = (state = initialState.auth, action) => {
     switch (action.type) {
 
         case LOGIN_START:

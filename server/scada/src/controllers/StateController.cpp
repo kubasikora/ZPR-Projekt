@@ -14,10 +14,10 @@ double StateController::getValue(int deviceId) {
     return state->getValue(deviceId);
 }
 
-boost::python::dict StateController::getState() {
+boost::python::list StateController::getState() {
     StateService* state = StateService::getInstance();
     this->statusCode = 200;
-    return state->mapToPythonDict();
+    return state->mapToPythonList();
 }
 
 }

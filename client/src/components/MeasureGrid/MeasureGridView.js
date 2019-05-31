@@ -6,51 +6,40 @@ import Col from 'react-bootstrap/Col';
 import DeviceCard from "./DeviceCard";
 import Header from "../Header";
 
+
+
 class MeasureGridView extends React.Component {
   constructor(props) {
     super(props);
+    this.id = null;
+  }
+
+  componentDidMount() {
+    this.id = window.setInterval(async () => this.props.updateState(), 500);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.id);
   }
 
   render() {
     return (
       <div>
-        <Header/>
+        <Header />
         <Container>
-          <Row style={{marginTop: "5rem"}}>
-            <Col sm={12} md={6} >
-            <DeviceCard 
-              description={"Temperatura gazu"}
-              value={23.45} 
-              name={"CS7"} 
-              unit={"°C"} 
-              serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
-            </Col>
-            <Col sm={12} md={6} >
-            <DeviceCard 
-              description={"Przepływ gazu"}
-              value={2330} 
-              name={"FLOMID XT5/XT5H"} 
-              unit={"l/h"} 
-              serial={"99e6c2cb-68a3-4f27-a289-5be85ce96669"}/>
-            </Col>
-          </Row>
-          <Row style={{marginTop: "2rem"}}>
-            <Col sm={12} md={6} >
-            <DeviceCard 
-              description={"Ciśnienie w rurociągu"}
-              value={0.665} 
-              unit={"bar"} 
-              name={"ADZ-SML-10.0"} 
-              serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
-            </Col>
-            <Col sm={12} md={6} >
-            <DeviceCard 
-              description={"Wilgotność gazu"}
-              value={35} 
-              unit={"%"} 
-              name={"AM2302"} 
-              serial={"b31edaf2-4fb7-11e9-8647-d663bd873d93"}/>
-            </Col>
+          <Row style={{ marginTop: "5rem" }}>
+            {this.props.processState.map(device => {
+              return (
+                <Col sm={12} md={6} >
+                  <DeviceCard
+                    description={device.deviceLabel}
+                    value={device.deviceValue}
+                    name={device.deviceName}
+                    unit={device.deviceUnit}
+                    serial={device.deviceSerial} />
+                </Col>
+              )
+            })}
           </Row>
         </Container>
       </div>

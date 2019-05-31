@@ -31,15 +31,18 @@ double StateService::getValue(const int deviceId) {
     else return this->state[deviceId];
 }
 
-boost::python::dict StateService::mapToPythonDict() {
+boost::python::list StateService::mapToPythonList() {
     Lock guard(std::mutex());
-    boost::python::dict dictionary;
+    boost::python::list deviceList;
 
     for(auto it = state.begin(); it != state.end(); ++it) {
-        dictionary[it->first] = it->second;
+        boost::python::dict dictionary;
+        dictionary["deviceId"] = it->first;
+        dictionary["value"] = it->second;
+        deviceList.append(dictionary);
     }
 
-    return dictionary;
+    return deviceList;
 }
 
 }

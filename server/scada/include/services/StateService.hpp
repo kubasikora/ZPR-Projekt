@@ -14,7 +14,7 @@ class StateService {
         static StateService* getInstance();
         void updateState(const int deviceId, const double measurementValue);
         double getValue(const int deviceId);
-        boost::python::dict mapToPythonDict();
+        boost::python::list mapToPythonList();
     private:
         StateService() {}
         StateService(const StateService&) = delete;
