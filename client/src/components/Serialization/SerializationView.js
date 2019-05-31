@@ -16,7 +16,7 @@ class SerializationView extends React.Component {
             <div className="serialization-panel">
                 <ParameterPanel />
             <div className="graphs">
-            {!this.props.loading? <Graphs/>: null}
+            {!this.props.loading && this.props.data[0]? <Graphs/>: null}
             </div>
         </div>
         )

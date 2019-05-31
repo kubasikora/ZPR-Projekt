@@ -4,8 +4,7 @@ import "./ParameterPanel.css"
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css"
 import Header from "../Header";
-import Dropdown from "react-bootstrap/Dropdown";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+
 
 class ParameterPanelView extends React.Component {
     constructor(props) {
@@ -30,9 +29,11 @@ class ParameterPanelView extends React.Component {
     handleChangeStart(newStartDate) {
         this.setState({ startDate: newStartDate })
     }
-    onButtonClick(e) {
+    onButtonClick(e){
         e.preventDefault();
+        console.log('clicked')
         this.props.getData(this.state);
+       // return
     }
     handleCheck(e) {
         let value = e.target.value;
@@ -47,6 +48,7 @@ class ParameterPanelView extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <div>
                 <Header />
@@ -125,7 +127,7 @@ class ParameterPanelView extends React.Component {
                         </div>
                         <div className="form-group">
                             <button onClick={this.onButtonClick}
-                                className="btn btn-primary" style={{ color: "white", fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold" }}>
+                                className="btn  btn-default" style={{fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold" }}>
                                 Pobierz
                             </button>
                         </div>
