@@ -25,14 +25,22 @@ boost::python::dict SerializeDataController::getSerializedData(boost::python::di
         dbResultSet = db->doWork(Measurement::mapEntityToSQLSelect(arguments));
         
         std::unique_ptr<std::vector<Measurement>>measurementSet = std::make_unique<std::vector<Measurement>>();
+        if(!measurementSet->empty()){
         measurementSet = Measurement::mapToMeasurements(std::move(dbResultSet));
         
         SerializationService serializationService;
         result = serializationService.mapToPythonDict(std::move(measurementSet));
 
-
+        
         this->statusCode = 201;
         return result;
+        }
+        else{
+        boost::python::dict returnMessage;
+        returnMessage["returnMessage"] = "No measurements";
+        this->statusCode = 400;
+        return returnMessage;
+        }
     }
     catch(KeyDoNotExistsException& ex) {
         boost::python::dict returnMessage;
