@@ -42,4 +42,18 @@ BOOST_AUTO_TEST_CASE( throwsOnNonExistingKey ) {
     BOOST_CHECK_THROW(zpr::extractKeyFromPythonDict(data,exampleKey), zpr::KeyDoNotExistsException);
 }
 
+BOOST_AUTO_TEST_CASE( exceptionStoresInfoAboutKey ) {
+    boost::python::dict data;
+    const std::string exampleKey = "exampleKey";
+    try {
+        zpr::extractKeyFromPythonDict(data,exampleKey);
+    }
+    catch(zpr::KeyDoNotExistsException& ex){
+        BOOST_CHECK_EQUAL(ex.key, "exampleKey");
+    }
+
+}
+
+
+
 BOOST_AUTO_TEST_SUITE_END()

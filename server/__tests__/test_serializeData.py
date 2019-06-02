@@ -27,7 +27,7 @@ def test_handler_is_a_teapot_before_handling_request():
     controller = SerializeDataController(db)
     assert controller.getStatusCode() == TEAPOT_CODE
 
-def test_getting_data():
+def test_returns_response():
     controller = SerializeDataController(db)
     response = controller.getSerializedData(valid_request_form)
-    print((response["data"]))
+    assert response
