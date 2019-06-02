@@ -23,8 +23,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --colors",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=node --colors --watchAll=false --forceExit --no-watchman",
+    "eject": "react-scripts eject",
+    "test_coverage": "react-scripts test --env=node --colors --watchAll --collectCoverage"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,7 +40,6 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "expect": "^24.7.1",
-    "jest": "^24.7.1",
     "react-testing-library": "^7.0.0"
   }
 }

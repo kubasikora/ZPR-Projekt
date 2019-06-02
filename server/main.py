@@ -14,8 +14,6 @@ import json
 import logging
 
 app = Flask(__name__)
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
 
 CORS(app)
 if len(sys.argv) > 1 and sys.argv[1] == '-d':
@@ -23,6 +21,8 @@ if len(sys.argv) > 1 and sys.argv[1] == '-d':
     Config = DevConfig()
 else:
     AUTH = True
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
     Config = ProdConfig()
 
 app.config.from_object(Config)

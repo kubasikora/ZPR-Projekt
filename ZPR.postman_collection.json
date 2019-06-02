@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3980f4c9-7dff-429d-973e-b97b9609d90b",
+		"_postman_id": "7dd858ad-e3b3-4ff3-9d84-860401e53202",
 		"name": "ZPR",
 		"description": "ZPR project\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -24,6 +24,7 @@
 									"pm.test(\"Unsuccessful POST request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
 									"});",
+									"",
 									""
 								],
 								"type": "text/javascript"
@@ -614,9 +615,33 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"Correctly stores values\", function () {",
+									"pm.test(\"Correctly sends devices\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData[1]).to.eql(34.5);",
+									"    pm.expect(jsonData[0][\"deviceId\"]).to.eql(1);",
+									"});",
+									"",
+									"var schema = [",
+									"  {",
+									"    \"deviceId\": \"int\",",
+									"    \"value\" : \"double\"",
+									"  },",
+									"  {",
+									"    \"deviceId\": \"int\",",
+									"    \"value\" : \"double\"",
+									"  },",
+									"  {",
+									"    \"deviceId\": \"int\",",
+									"    \"value\" : \"double\"",
+									"  },",
+									"  {",
+									"    \"deviceId\": \"int\",",
+									"    \"value\" : \"double\"",
+									"  }",
+									"];",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"  var jsonData = pm.response.json();",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
 									"});"
 								],
 								"type": "text/javascript"
@@ -626,10 +651,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "localhost:5000/state",
 							"host": [
@@ -638,6 +659,273 @@
 							"port": "5000",
 							"path": [
 								"state"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get serialized data",
+			"item": [
+				{
+					"name": "Valid get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "082ba791-065b-4a15-a5d6-7e970ed3b653",
+								"exec": [
+									"var schema = {",
+									"  \"deviceId\": \"int\",",
+									"  \"data\": \"array\"",
+									"};",
+									"",
+									"var dataSchema = {",
+									"    \"value\": \"double\",",
+									"    \"timestamp\": \"string\"",
+									"};",
+									"",
+									"pm.test('Global schema is valid', function() {",
+									"  var jsonData = pm.response.json();",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test('Local schemas are valid', function() {",
+									"  var jsonData = pm.response.json();",
+									"  for (var data in jsonData.data){",
+									"      pm.expect(tv4.validate(data, dataSchema)).to.be.true;",
+									"  }",
+									"});",
+									"",
+									"pm.test(\"DeviceId is correct\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deviceId).to.eql(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/getSerializedData?startTime=2019-05-31T14:30:00.000Z&stopTime=2019-05-31T14:45:00.000Z&deviceId=3",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getSerializedData"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2019-05-31T14:30:00.000Z"
+								},
+								{
+									"key": "stopTime",
+									"value": "2019-05-31T14:45:00.000Z"
+								},
+								{
+									"key": "deviceId",
+									"value": "3"
+								},
+								{
+									"key": "startTIme",
+									"value": "2019-May-20 23:59:00",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid get - missing deviceId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "082ba791-065b-4a15-a5d6-7e970ed3b653",
+								"exec": [
+									"var schema = {",
+									"  \"returnMessage\": \"string\"",
+									"};",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"  var jsonData = pm.response.json();",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Correct error message\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.returnMessage).to.eql(\"Missing key deviceId\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/getSerializedData?startTime=2019-05-31T14:30:00.000Z&stopTime=2019-05-31T14:45:00.000Z",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getSerializedData"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2019-05-31T14:30:00.000Z"
+								},
+								{
+									"key": "stopTime",
+									"value": "2019-05-31T14:45:00.000Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid get - missing startTime",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "082ba791-065b-4a15-a5d6-7e970ed3b653",
+								"exec": [
+									"var schema = {",
+									"  \"returnMessage\": \"string\"",
+									"};",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"  var jsonData = pm.response.json();",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Correct error message\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.returnMessage).to.eql(\"Missing key startTime\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/getSerializedData?stopTime=2019-05-31T14:45:00.000Z&deviceId=3",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getSerializedData"
+							],
+							"query": [
+								{
+									"key": "stopTime",
+									"value": "2019-05-31T14:45:00.000Z"
+								},
+								{
+									"key": "deviceId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid get - missing stopTime",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "082ba791-065b-4a15-a5d6-7e970ed3b653",
+								"exec": [
+									"var schema = {",
+									"  \"returnMessage\": \"string\"",
+									"};",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"  var jsonData = pm.response.json();",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Correct error message\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.returnMessage).to.eql(\"Missing key stopTime\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/getSerializedData?startTime=2019-05-31T14:30:00.000Z&deviceId=3",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"getSerializedData"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2019-05-31T14:30:00.000Z"
+								},
+								{
+									"key": "deviceId",
+									"value": "3"
+								}
 							]
 						}
 					},

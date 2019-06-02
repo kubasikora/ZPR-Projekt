@@ -24,15 +24,13 @@ boost::python::dict SerializeDataController::getSerializedData(const boost::pyth
         std::unique_ptr<DatabaseService> db = std::make_unique<PostgreSQLService>(this->host, this->user, this->password, this->port);
         dbResultSet = db->doWork(Measurement::mapEntityToSQLSelect(arguments));
 
-        std::unique_ptr<std::vector<Measurement>>measurementSet = std::make_unique<std::vector<Measurement>>();
-
-        if(!measurementSet->empty()) {
+        if(!dbResultSet->empty()) {
+            std::unique_ptr<std::vector<Measurement>>measurementSet = std::make_unique<std::vector<Measurement>>();
             measurementSet = Measurement::mapToMeasurements(std::move(dbResultSet));
 
             SerializationService serializationService;
             result = serializationService.mapToPythonDict(std::move(measurementSet));
-
-
+            
             this->statusCode = 201;
             return result;
 
