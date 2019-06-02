@@ -7,7 +7,7 @@
 
 namespace zpr {
 
-DatabaseController::DatabaseController(boost::python::dict& env) {
+DatabaseController::DatabaseController(const boost::python::dict& env) {
     this->host = extractKeyFromPythonDict(env, "host");
     this->user = extractKeyFromPythonDict(env, "user");
     this->password = extractKeyFromPythonDict(env, "password");

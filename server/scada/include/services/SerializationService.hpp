@@ -18,7 +18,7 @@ class SerializationService {
     private:
         static const int maxSamples;
         std::unique_ptr<std::vector<Measurement>> resample(std::unique_ptr<std::vector<Measurement>> measurement);
-};     
+};
 
 }
 

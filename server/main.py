@@ -11,8 +11,12 @@ from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSign
 from scada import MeasurementController, SerializeDataController, StateController
 import os, sys
 import json
+import logging
 
 app = Flask(__name__)
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
 CORS(app)
 if len(sys.argv) > 1 and sys.argv[1] == '-d':
     AUTH = False

@@ -9,7 +9,7 @@
 
 namespace zpr {
 
-double StateController::getValue(int deviceId) {
+double StateController::getValue(const int deviceId) const {
     StateService* state = StateService::getInstance();
     return state->getValue(deviceId);
 }

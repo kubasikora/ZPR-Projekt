@@ -118,6 +118,7 @@ if(platform.system() == "Linux"):
     env_test = Environment(TARGET_ARCH='x86')
 
     sources = [Glob(TEST_SRC_DIR + '*.cpp'),
+               Glob(TEST_SRC_DIR + 'controllers/*.cpp'),
                Glob(TEST_SRC_DIR + 'utilities/*.cpp'),
                Glob(TEST_SRC_DIR + 'mappers/*.cpp'),
                Glob(TEST_SRC_DIR + 'services/*.cpp')]

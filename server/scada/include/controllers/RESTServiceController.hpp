@@ -3,9 +3,11 @@
 
 namespace zpr {
 
+const int TEAPOT_CODE = 418;
+
 class RESTServiceController {
     public:
-        RESTServiceController() : statusCode(418) {}
+        RESTServiceController() : statusCode(TEAPOT_CODE) {}
         int getStatusCode() {
             return this->statusCode;
         }

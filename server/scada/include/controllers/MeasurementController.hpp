@@ -21,13 +21,13 @@ class MeasurementController : public DatabaseController, public RESTServiceContr
          * @param env - zmienna konfiguracjyna, inicjuje kontroler bazy danych wartościami potrzebnymi
          * do uwierzytelnienia i uzyskania połączenia.
          */
-        MeasurementController(boost::python::dict& env) : DatabaseController(env) {}
+        MeasurementController(const boost::python::dict& env) : DatabaseController(env) {}
 
         /**
          * Dodaje pomiar do bazy danych i ustawia odpowiedni status.
          * @param request - słownik z atrybutami uzyskanymi z HTTP POST, zawierającymi
          */
-        std::string postNewMeasurement(boost::python::dict& request);
+        std::string postNewMeasurement(const boost::python::dict& request);
 };
 
 }

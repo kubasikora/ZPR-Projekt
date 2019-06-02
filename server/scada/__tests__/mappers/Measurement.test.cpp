@@ -1,8 +1,8 @@
 #define BOOST_TEST_DYN_LINK
-#ifdef __unix__              
-    #include <boost/test/unit_test.hpp>
+#ifdef __unix__
+#include <boost/test/unit_test.hpp>
 #elif defined(_WIN32) || defined(WIN32)
-    #include <boost/test/included/unit_test.hpp>
+#include <boost/test/included/unit_test.hpp>
 #endif
 
 #include<string>
@@ -18,9 +18,8 @@
 
 BOOST_AUTO_TEST_SUITE( MeasurementTests )
 
-BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings )
-{
-    
+BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings ) {
+
     const std::string exampleDeviceId = "1";
     const std::string exampleValue = "25.5";
     const std::string exampleTimestamp = "2002-Jan-31 23:59:00";
@@ -33,8 +32,7 @@ BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings )
 
 }
 
-BOOST_AUTO_TEST_CASE( createsMeasurementFromDict )
-{    
+BOOST_AUTO_TEST_CASE( createsMeasurementFromDict ) {
     Py_Initialize();
     boost::python::dict data;
     const std::string exampleValueKey = "value";
@@ -51,8 +49,7 @@ BOOST_AUTO_TEST_CASE( createsMeasurementFromDict )
 
 }
 
-BOOST_AUTO_TEST_CASE( MapsEntityToSQLSelect )
-{   
+BOOST_AUTO_TEST_CASE( MapsEntityToSQLSelect ) {
 
     boost::python::dict data;
     const std::string exampleStartTimeKey = "startTime";
@@ -68,13 +65,12 @@ BOOST_AUTO_TEST_CASE( MapsEntityToSQLSelect )
     BOOST_CHECK_EQUAL(zpr::Measurement::mapEntityToSQLSelect(data),properSelect);
 
 }
-BOOST_AUTO_TEST_CASE( MapsEntityToSQLInsert )
-{    
+BOOST_AUTO_TEST_CASE( MapsEntityToSQLInsert ) {
     const std::string exampleDeviceId = "1";
     const std::string exampleValue = "25.5";
     const std::string exampleTimestamp = "2002-Jan-31 23:59:00";
     const std:: string exampleId = "5";
-    auto measurement = zpr::Measurement(exampleId, exampleValue, exampleTimestamp, exampleDeviceId);   
+    auto measurement = zpr::Measurement(exampleId, exampleValue, exampleTimestamp, exampleDeviceId);
     const std::string properInsert = "INSERT INTO measurements VALUES (default, 25.500000, TIMESTAMP '2002-Jan-31 23:59:00', 1)";
     BOOST_CHECK_EQUAL(measurement.mapEntityToSQLInsert(), properInsert);
 }

@@ -6,8 +6,7 @@
 #include<map>
 #include<mutex>
 
-namespace zpr
-{
+namespace zpr {
 
 class StateService {
     public:

@@ -3,4 +3,7 @@
 -s4
 --indent-labels
 --indent-classes
+-A2
 -r -n --mode=c
+-f -xG
+

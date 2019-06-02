@@ -9,7 +9,7 @@ namespace zpr {
 
 class StateController : public RESTServiceController {
     public:
-        double getValue(int deviceId);
+        double getValue(const int deviceId) const;
         boost::python::list getState();
 };
 

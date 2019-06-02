@@ -1,8 +1,8 @@
 #define BOOST_TEST_DYN_LINK
-#ifdef __unix__              
-    #include <boost/test/unit_test.hpp>
+#ifdef __unix__
+#include <boost/test/unit_test.hpp>
 #elif defined(_WIN32) || defined(WIN32)
-    #include <boost/test/included/unit_test.hpp>
+#include <boost/test/included/unit_test.hpp>
 #endif
 
 #include<string>
@@ -18,9 +18,8 @@
 
 BOOST_AUTO_TEST_SUITE( DeviceTests )
 
-BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings )
-{
-    
+BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings ) {
+
     const std::string exampleDeviceId = "1";
     const std::string exampleSerialCode = "1893274832";
     const std::string exampleModel = "ModelX";
@@ -31,8 +30,7 @@ BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings )
     BOOST_IS_DEFINED( zpr::Measurement(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue));
 }
 
-BOOST_AUTO_TEST_CASE( createsMeasurementFromDict )
-{    
+BOOST_AUTO_TEST_CASE( createsMeasurementFromDict ) {
     Py_Initialize();
     boost::python::dict data;
     const std::string exampleDeviceId = "1";

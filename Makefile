@@ -63,7 +63,7 @@ test:
 ## misc
 
 lint:
-	astyle --project "server/scada/src/*.cpp" "server/scada/include/*.hpp"
+	astyle --project "server/scada/src/*.cpp" "server/scada/include/*.hpp" "server/scada/__tests__/*.cpp"
 
 documentation:
 	doxygen

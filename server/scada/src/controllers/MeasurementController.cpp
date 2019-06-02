@@ -14,7 +14,7 @@
 
 namespace zpr {
 
-std::string MeasurementController::postNewMeasurement(boost::python::dict& request) {
+std::string MeasurementController::postNewMeasurement(const boost::python::dict& request) {
     try {
         Measurement newMeasurement(request);
 
@@ -26,18 +26,15 @@ std::string MeasurementController::postNewMeasurement(boost::python::dict& reque
 
         this->statusCode = 201;
         return std::string("OK");
-    }
-    catch(KeyDoNotExistsException& ex) {
+    } catch(KeyDoNotExistsException& ex) {
         std::string returnMessage = "Missing key " + ex.key;
         this->statusCode = 400;
         return returnMessage;
-    }
-    catch(std::invalid_argument& ex) {
+    } catch(std::invalid_argument& ex) {
         std::string returnMessage = "Invalid key";
         this->statusCode = 400;
         return returnMessage;
-    }
-    catch(ForeignKeyViolationException& ex) {
+    } catch(ForeignKeyViolationException& ex) {
         std::string returnMessage = "Nonexisting device";
         this->statusCode = 400;
         return returnMessage;
