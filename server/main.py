@@ -53,14 +53,16 @@ class User(db.Model):
         return "id: {0}, username: {1}, password_hash: {2}".format(self.id, self.username, self.password_hash)
 
     def hash_password(self, password):
-        self.password_hash = pwd_context.encrypt(password)
+        self.password_hash = pwd_context.hash(password)
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password_hash)
 
     def generate_auth_token(self, expiration = 600):
         s = Serializer(app.config['SECRET_KEY'], expires_in = expiration)
-        return  s.dumps({ 'id': self.id})
+        if self.id == None or self.username == None:
+            raise Exception
+        return  s.dumps({ 'id': self.id, 'username': self.username })
 
     @staticmethod
     def verify_auth_token(token):
