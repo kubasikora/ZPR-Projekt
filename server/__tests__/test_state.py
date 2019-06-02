@@ -42,7 +42,7 @@ def test_adds_new_value_to_state():
     controller = StateController()
     response = controller.getState()
     insert_new_measurement(first_measurement["deviceId"], first_measurement["value"])
-    assert response[first_measurement["deviceId"]] == first_measurement["value"]
+    assert response[0]["value"] == first_measurement["value"]
 
 def test_overwrites_new_value_in_state():
     first_measurement = {
@@ -57,7 +57,7 @@ def test_overwrites_new_value_in_state():
     insert_new_measurement(second_measurement["deviceId"], second_measurement["value"])
     controller = StateController()
     response = controller.getState()
-    assert response[first_measurement["deviceId"]] == second_measurement["value"]
+    assert response[0]["value"] == second_measurement["value"]
 
 def test_correctly_stores_more_than_one_value():
     first_measurement = {
@@ -72,7 +72,7 @@ def test_correctly_stores_more_than_one_value():
     insert_new_measurement(second_measurement["deviceId"], second_measurement["value"])
     controller = StateController()
     response = controller.getState()
-    assert response[first_measurement["deviceId"]] == first_measurement["value"] and response[second_measurement["deviceId"]] == second_measurement["value"]
+    assert response[0]["value"] == first_measurement["value"] and response[1]["value"] == second_measurement["value"]
 
 def test_returns_200_on_correct_get():
     controller = StateController()

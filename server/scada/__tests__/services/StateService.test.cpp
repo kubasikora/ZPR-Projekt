@@ -79,4 +79,16 @@ BOOST_AUTO_TEST_CASE( correctlyTransformsValue ) {
     BOOST_CHECK_EQUAL(boost::python::extract<double>(element["value"]), 34.5);
 }
 
+BOOST_AUTO_TEST_CASE( getValueTest ){
+    zpr::StateService* state = zpr::StateService::getInstance();
+    state->updateState(1, 31.5);
+    BOOST_CHECK_EQUAL(state->getValue(1), 31.5);
+}
+
+BOOST_AUTO_TEST_CASE( returnsZeroWhenAskedForNonexistentDevice ){
+    zpr::StateService* state = zpr::StateService::getInstance();
+    state->updateState(1, 31.5);
+    BOOST_CHECK_EQUAL(state->getValue(-1), 0.0);    
+}
+
 BOOST_AUTO_TEST_SUITE_END()
