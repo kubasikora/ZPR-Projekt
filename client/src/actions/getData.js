@@ -13,7 +13,13 @@ function getData (state) {
           'stopTime': state.endDate,
           'deviceId': element
         }
-        axios.get(`${endpoint}/getSerializedData`, {headers: {'Access-Control-Allow-Origin': '*'},params: args})
+        const basicAuth = localStorage.getItem('basicAuth');
+        axios.get(`${endpoint}/getSerializedData`, 
+        {headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': basicAuth
+          },
+            params: args})
         .then (response => {
           dispatch({type: GET_DATA_OK, data: response.data});
         })

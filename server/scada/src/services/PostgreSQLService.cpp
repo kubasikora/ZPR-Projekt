@@ -33,6 +33,7 @@ std::unique_ptr<std::vector<std::string>> PostgreSQLService::doWork(const std::s
         worker->commit();
         this->connection->disconnect();
         return resultSet;
+
     } catch(pqxx::foreign_key_violation& ex) {
         throw ForeignKeyViolationException();
     }

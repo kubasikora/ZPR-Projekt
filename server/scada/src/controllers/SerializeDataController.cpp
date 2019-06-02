@@ -25,24 +25,36 @@ boost::python::dict SerializeDataController::getSerializedData(const boost::pyth
         dbResultSet = db->doWork(Measurement::mapEntityToSQLSelect(arguments));
 
         std::unique_ptr<std::vector<Measurement>>measurementSet = std::make_unique<std::vector<Measurement>>();
-        measurementSet = Measurement::mapToMeasurements(std::move(dbResultSet));
 
-        SerializationService serializationService;
-        result = serializationService.mapToPythonDict(std::move(measurementSet));
+        if(!measurementSet->empty()) {
+            measurementSet = Measurement::mapToMeasurements(std::move(dbResultSet));
+
+            SerializationService serializationService;
+            result = serializationService.mapToPythonDict(std::move(measurementSet));
 
 
-        this->statusCode = 201;
-        return result;
+            this->statusCode = 201;
+            return result;
+
+        } else {
+            boost::python::dict returnMessage;
+            returnMessage["returnMessage"] = "No measurements";
+            this->statusCode = 400;
+            return returnMessage;
+        }
+
     } catch(KeyDoNotExistsException& ex) {
         boost::python::dict returnMessage;
         returnMessage["returnMessage"] = "Missing key " + ex.key;
         this->statusCode = 400;
         return returnMessage;
+
     } catch(std::invalid_argument& ex) {
         boost::python::dict returnMessage;
         returnMessage["returnMessage"] = "Invalid key";
         this->statusCode = 400;
         return returnMessage;
+
     } catch(ForeignKeyViolationException& ex) {
         boost::python::dict returnMessage;
         returnMessage["returnMessage"] =  "Nonexisting device";

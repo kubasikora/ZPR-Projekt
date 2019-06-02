@@ -5,5 +5,5 @@
 --indent-classes
 -A2
 -r -n --mode=c
--f -xG
+-f -xG -F
 

@@ -27,6 +27,7 @@ void StateService::updateState(const int deviceId, const double measurementValue
 double StateService::getValue(const int deviceId) {
     if(this->state.find(deviceId) == this->state.end())
         return 0.0;
+
     else return this->state[deviceId];
 }
 

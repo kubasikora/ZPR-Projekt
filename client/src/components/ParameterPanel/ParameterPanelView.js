@@ -18,7 +18,7 @@ class ParameterPanelView extends React.Component {
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
-        this.onButtonClick = this.onButtonClick.bind(this);
+       
     }
 
 
@@ -29,12 +29,7 @@ class ParameterPanelView extends React.Component {
     handleChangeStart(newStartDate) {
         this.setState({ startDate: newStartDate })
     }
-    onButtonClick(e){
-        e.preventDefault();
-        console.log('clicked')
-        this.props.getData(this.state);
-       // return
-    }
+
     handleCheck(e) {
         let value = e.target.value;
         let newArray = this.state.checked;
@@ -48,7 +43,6 @@ class ParameterPanelView extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div>
                 <Header />
@@ -72,7 +66,6 @@ class ParameterPanelView extends React.Component {
                         endDate={this.state.endDate}
                         onChange={this.handleChangeEnd}
                     />
-                    <form>
                         <div className="checkboxes">
                             <div className="form-check my-form-check">
                                 <label className="form-check-label my-form-check-label">
@@ -126,12 +119,11 @@ class ParameterPanelView extends React.Component {
                             </div>
                         </div>
                         <div className="form-group">
-                            <button onClick={this.onButtonClick}
+                            <button onClick={this.props.getData(this.state)}
                                 className="btn  btn-default" style={{fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold" }}>
                                 Pobierz
                             </button>
                         </div>
-                    </form>
 
                 </div>
             </div>

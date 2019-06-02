@@ -50,6 +50,7 @@ std::unique_ptr<std::vector<Measurement>> SerializationService::resample(std::un
         }
 
         return resampledMeasurements;
+
     } else
         return measurements;
 }

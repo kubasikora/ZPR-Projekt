@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE( createsPythonListBasedOnState ) {
     state->updateState(3, 23.6);
     state->updateState(4, 30.7);
     boost::python::list listState = state->mapToPythonList();
-    
+
     BOOST_CHECK_EQUAL(boost::python::len(listState), 4);
 }
 
