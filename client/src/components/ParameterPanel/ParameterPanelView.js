@@ -4,6 +4,7 @@ import "./ParameterPanel.css"
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css"
 import Header from "../Header";
+import Button from "react-bootstrap/Button"
 
 
 class ParameterPanelView extends React.Component {
@@ -13,11 +14,13 @@ class ParameterPanelView extends React.Component {
             startDate: "",
             endDate: "",
             device: "Devices",
-            checked: []
+            checked: [],
+            button: true
         }
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
+        this.getData = this.getData.bind(this);
        
     }
 
@@ -41,7 +44,12 @@ class ParameterPanelView extends React.Component {
         }
         this.setState({ checked: newArray });
     }
-
+    getData(e){
+    
+        console.log('clicked',e)
+        e.preventDefault()
+        this.props.getData(this.state)
+    }
     render() {
         return (
             <div>
@@ -117,14 +125,14 @@ class ParameterPanelView extends React.Component {
                                     AM2302
                                 </label>
                             </div>
-                        </div>
-                        <div className="form-group">
-                            <button onClick={this.props.getData(this.state)}
-                                className="btn  btn-default" style={{fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold" }}>
+                        
+                        <div>
+                            <Button onClick={this.getData} type="button" id= "button"
+                                className="btn  btn-default"  style={{fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold" }}>
                                 Pobierz
-                            </button>
+                            </Button>
                         </div>
-
+                        </div>
                 </div>
             </div>
                 )
