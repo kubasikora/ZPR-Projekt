@@ -13,7 +13,7 @@ namespace zpr {
 class DatabaseController {
     public:
     /**
-     * Konstruktor zawiera słownik z parametrami niezbędnymi do nawiązania połączenia z bazą danych
+     * @params env słownik z parametrami niezbędnymi do nawiązania połączenia z bazą danych
      */
         DatabaseController(const boost::python::dict& env);
 

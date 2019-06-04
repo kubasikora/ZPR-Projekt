@@ -17,7 +17,7 @@ class SerializationService {
     public:
         //std::unique_ptr<std::vector<Measurement>>mapToMeasurements(std::unique_ptr<std::vector<std::string>> vector);
         /**
-         * Mapowanie pobranych danych na słownik, który zostanie wysłany użytkownikowi
+         * @params measurements- wektor danych  pobranych danych, który zostanie zmapowany na słownik, który zostanie wysłany użytkownikowi
          */
         boost::python::dict mapToPythonDict(std::unique_ptr<std::vector<Measurement>> measurements);
     private:

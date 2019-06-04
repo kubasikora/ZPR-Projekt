@@ -19,9 +19,8 @@ class SerializeDataController : public DatabaseController, public RESTServiceCon
     public:
         SerializeDataController(const boost::python::dict& env) : DatabaseController(env) {}
         /**
-         * Pobieranie odpowiednich danych na podstawie 
-         * @param arguments
-         * Zleca resampling danych, zwraca dane w odpowiedniej formie
+         * @param arguments - argumenty z HTTP GET niezbędne do pobrania danych
+         * Zarządza całym procesem serializacji. Zwraca dane w odpowiednim formacie.
          */
         boost::python::dict getSerializedData(const boost::python::dict& arguments);
 };
