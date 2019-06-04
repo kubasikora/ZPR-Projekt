@@ -4,7 +4,9 @@
 namespace zpr {
 
 const int TEAPOT_CODE = 418;
-
+/**
+ * Kontroler zwracający kod odpowiedzi
+ */
 class RESTServiceController {
     public:
         RESTServiceController() : statusCode(TEAPOT_CODE) {}
