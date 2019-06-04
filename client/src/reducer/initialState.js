@@ -4,7 +4,7 @@ const initialState = {
         password: null,
     },
     data: {
-        loading: true,
+        loading: false,
         data: [],
     },
     processState: {

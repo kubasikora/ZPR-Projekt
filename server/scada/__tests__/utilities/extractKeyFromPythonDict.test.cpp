@@ -29,6 +29,7 @@ BOOST_AUTO_TEST_CASE( retrievesValue ) {
 }
 
 BOOST_AUTO_TEST_CASE( doesntThrowOnCorrectOperation ) {
+    Py_Initialize();
     boost::python::dict data;
     const std::string exampleKey = "exampleKey";
     const std::string exampleValue = "exampleValue";
@@ -37,12 +38,14 @@ BOOST_AUTO_TEST_CASE( doesntThrowOnCorrectOperation ) {
 }
 
 BOOST_AUTO_TEST_CASE( throwsOnNonExistingKey ) {
+    Py_Initialize();
     boost::python::dict data;
     const std::string exampleKey = "exampleKey";
     BOOST_CHECK_THROW(zpr::extractKeyFromPythonDict(data,exampleKey), zpr::KeyDoNotExistsException);
 }
 
 BOOST_AUTO_TEST_CASE( exceptionStoresInfoAboutKey ) {
+    Py_Initialize();
     boost::python::dict data;
     const std::string exampleKey = "exampleKey";
     try {

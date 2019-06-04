@@ -38,7 +38,7 @@ clean:
 ## testing 
 
 python_test:
-	pytest --ignore=server/scada/__tests__ --ignore=scada/ "-s"
+	pytest --ignore=server/scada
 
 rest_test:
 	newman run ZPR.postman_collection.json
@@ -47,13 +47,13 @@ client_test:
 	cd $(PWD)/client && npm test
 
 cpp_test:
-	$(RUN_CPP_TEST)
+	$(RUN_CPP_TEST) --show_progress --random
 
 selenium_test:
 	selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless]" ZPR-Projekt.side
 
 test:
-	$(RUN_CPP_TEST)
+	$(RUN_CPP_TEST) --show_progress --random
 	pytest --ignore=server/scada
 	newman run ZPR.postman_collection.json 
 	cd $(PWD)/client && npm test 

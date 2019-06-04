@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE( createsMeasurementFromDict ) {
 }
 
 BOOST_AUTO_TEST_CASE( MapsEntityToSQLSelect ) {
-
+    Py_Initialize();
     boost::python::dict data;
     const std::string exampleStartTimeKey = "startTime";
     const std::string exampleStartTime = "2002-Jan-30 23:59:00";
