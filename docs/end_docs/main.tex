@@ -1,0 +1,124 @@
+\documentclass{article}
+
+% Polskie znaki
+\usepackage{polski}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{indentfirst}
+
+\title{\LARGE{Dokumentacja końcowa projektu} \\ \Large{Serwer serii danych}}
+\author{Julia Kłos \and Jakub Sikora}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Instrukcja użytkownika}
+W celu uruchomienia projektu należy otworzyć przeglądarkę internetową i 
+w miejsce adresu strony wpisać \texttt{localhost:3000}. Spowoduje to załadowanie
+aplikacji klienckiej. Użytkownik w celu uzyskania dostępu, musi uwierzytelnić się
+przy pomocy loginu i hasła, otrzymanego od administratora serwisu, wykorzystując przy 
+tym specjalnie przygotowany formularz do logowania. W przypadku błędnych danych
+uwierzytelniających, użytkownik nie otrzyma dostępu do aplikacji i zostanie 
+poinformowany o błędzie, stosownym komunikatem. Poprawne dane uwierzytelniające, sprawią
+że użytkownik zostanie przekierowany na panel operatora procesu.\\
+
+
+\subsection{Panel operatora}
+Panel operatora procesu składa się z logicznie wydzielonych czterech podpaneli, z których
+każdy reprezentuje jeden czujnik obsługiwanego procesu. W górnej części podpanelu wyświetlana
+jest wartość danej zmiennej procesowej, aktualizowana na bieżąco. Pod wartością, znajdują się 
+pozostałe informacje na temat danej zmiennej procesowej, takie jak: 
+\begin{itemize}
+    \item opis czujnika
+    \item model 
+    \item identyfikatora czujnika w systemie
+\end{itemize}
+
+Panel operatora nie posiada żadnych dodatkowych funkcjonalności, gdyż służy tylko i wyłącznie
+do kontroli procesu przez operatora.\\
+
+W górnej części panelu, znajduje się pasek nawigacyjny. Po jego lewej stronie znajdują się 
+przyciski do zmiany aktualnie wyświetlanego panelu. Aby przejść do panelu serii danych, należy
+nacisnąć przycisk \textit{Serie danych}.\\
+
+\subsection{Panel serii danych}
+Panel serii danych składa się z dwóch sekcji. Po prawej stronie znajduje się panel służący do wyboru
+urządzenia oraz przedziału czasowego. W celu wybrania przedziału należy wcisnąć pierwszy z dwóch
+białych prostokątów. Spowoduje to pojawienie się kalendarza z możliwością wyboru godziny. Po wybraniu
+początkowej daty i godziny należy wybrać drugi z prostokątów i zaznaczyć datę i godzinę końca przedziału.\\
+
+Następnie należy wybrać, dane z których urządzeń chcemy serializować. Wyboru urządzenia dokonujemy 
+poprzez zaznaczenie odpowiedniego przycisku. Istnieje możliwość wyboru kilku urządzeń równocześnie.
+Wciśnięcie przycisku \textit{Pobierz}, spowoduje pobranie zserializowanych danych i ich 
+prezentację na wykresie po lewej stronie panelu. \\
+
+Po zakończeniu pracy z aplikacją, zalecanym jest wylogowanie się z systemu. Aby tego dokonać,
+należy w prawej części paska nawigacyjnego, nacisnąć na swój login. Spowoduje to wylogowanie się 
+z aplikacji i przekierowanie na panel logowania.
+
+\section{Podsumowanie prac}
+W specyfikacji wstępnej opisaliśmy następującą listę funkcjonalności:
+\begin{itemize}
+    \item Zbieranie danych od czujników
+    \item Zapis pomiaru do bazy danych
+    \item Wyświetlanie i odświeżanie aktualnych wartości zmiennych procesowych
+    \item Pobranie danych pomiarowych z bazy i ich serializacja
+    \item Generacja wykresów danych z zadaną dokładnością
+    \item Możliwość łączenia wykresów
+    \item Uwierzytelnianie
+    \item Prezentacja informacji o urządzeniu
+\end{itemize}
+
+Wszystkie założone przez nas funkcjonalności zostały zrealizowane. Aplikacja działa
+na systemie Linux (Ubuntu) i Windows. Dodatkowo, przygotowana została produkcjyna 
+baza danych do przechowywania pomiarów, tak aby wszyscy użytkownicy mogli działać na tych 
+samych danych.
+
+\section{Opis rozwiązania}
+\subsection{Architektura rozwiązania}
+System składa się z czterech komponentów:
+\begin{itemize}
+\item Serwera panelu operatorskiego (frontend)
+\item Serwera pośredniczącego (backend)
+\item biblioteki kontrolerów 
+\item Relacyjnej bazy danych
+\end{itemize}
+Panel operatorski został napisany w języku Javascript, przy wykorzystaniu
+biblioteki React.js. Serwer pośredniczący został przygotowany w języku Python przy uży-
+ciu pakietu Flask, z którego wywołujemy kontrolery transakcji obsługujące żądania
+napisane w języku C++, połączone z serwerem przy wykorzystaniu biblioteki
+Boost.Python. Do przechowywania danych wykorzystujemy bazę opartą o silnik PostgreSQL
+lokalnie oraz w chmurze.
+
+\subsection{Miary wielkościowe i jakościowe projektu}
+Liczba linii kodu:
+\begin{itemize}
+    \item serwer frontendowy (Javascript): 1000 linii kodu
+    \item serwer pośredniczący (Python): 100 linii kodu
+    \item biblioteka kontrolerów (C++): 500 linii kodu
+\end{itemize}
+
+Procentowe pokrycie testami:
+\begin{itemize}
+    \item serwer frontendowy (Javascript): $20$ 
+    \item serwer pośredniczący (Python): $40$ 
+    \item biblioteka kontrolerów (C++): $90$ 
+\end{itemize}
+Dodatkowo, przygotowaliśmy testy REST API przy pomocy programu Postman oraz testy
+GUI przy pomocy programu Selenium. Obliczenie procentowego pokrycia tymi testami 
+jest niemożliwe, jednak naszym zdaniem uzupełniają one testy modułów w języku Python
+i Javascript.\\
+
+Liczba osobogodzin spędzona nad projektem wyniosła około 80.
+\section{Podsumowanie}
+W trakcie pracy nad projektem, napotkaliśmy spory problem z instalacją biblioteki \texttt{libpqxx}
+obsługującego komunikację z bazą danych na poziomie języka C++. Instalacja tej biblioteki w systemie Windows
+okazała się zagadnieniem nietrywialnym, z powodu niejednoznacznej instrukcji instalacji. Nie chcieliśmy 
+rezygnować z tej biblioteki, ponieważ przygotowaliśmy już spory kawałek kodu z jej wykorzystaniem. Można było ustrzec się
+przed tym problemem, najpierw przygotowując równolegle oba środowiska a dopiero potem rozpocząć
+proces pisania kodu. 
+
+\end{document}
