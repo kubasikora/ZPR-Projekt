@@ -32,8 +32,8 @@ if(platform.system() == "Linux"):
                Glob(BUILD_DIR + 'mappers/*.cpp'),
                Glob(BUILD_DIR + 'services/*.cpp')]
 
-    e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra' )
-    e.Append( LINKFLAGS = '-Wall -pthread' )
+    e.Append( CPPFLAGS = '-Wall -pedantic -pthread -Wno-long-long -shared -Wextra -fprofile-arcs -ftest-coverage' )
+    e.Append( LINKFLAGS = '-Wall -pthread -fprofile-arcs -ftest-coverage' )
 
     e.Append( CPPPATH = [INCLUDE_DIR,
                          BOOST_CPPPATH,
@@ -48,7 +48,8 @@ if(platform.system() == "Linux"):
     e.Append( LIBS = [ 'boost_python36', 
                        'boost_date_time', 
                        'pqxx',
-                       'python3.6m'
+                       'python3.6m',
+                       'gcov'
                         ] )
 
     target = 'scada.so'

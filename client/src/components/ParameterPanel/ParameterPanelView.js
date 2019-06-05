@@ -3,8 +3,8 @@ import DatePicker from "react-datepicker"
 import "./ParameterPanel.css"
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css"
-import Header from "../Header";
 import Button from "react-bootstrap/Button"
+import Spinner from 'react-bootstrap/Spinner'
 
 
 class ParameterPanelView extends React.Component {
@@ -21,8 +21,8 @@ class ParameterPanelView extends React.Component {
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
         this.getData = this.getData.bind(this);
-       
     }
+
 
 
     handleChangeEnd(newEndDate) {
@@ -44,16 +44,20 @@ class ParameterPanelView extends React.Component {
         }
         this.setState({ checked: newArray });
     }
-    getData(e){
-    
-        console.log('clicked',e)
-        e.preventDefault()
-        this.props.getData(this.state)
+    getData(){
+        //console.log('clicked',e)
+        if(this.state.startDate == "" || this.state.endDate == "" || this.state.checked.length == 0){
+            alert("Niepoprawne dane");
+        }
+        else {
+            this.props.getData(this.state);
+            this.setState({button: true});
+        }
     }
+
     render() {
         return (
             <div>
-                <Header />
                 <div className="parameter-side">
                     <DatePicker
                         style={{ color: "white", fontFamily: "Montserrat" }}
@@ -74,7 +78,7 @@ class ParameterPanelView extends React.Component {
                         endDate={this.state.endDate}
                         onChange={this.handleChangeEnd}
                     />
-                        <div className="checkboxes">
+                        <div className="checkboxes" style={{marginTop: "5vh"}}>
                             <div className="form-check my-form-check">
                                 <label className="form-check-label my-form-check-label">
                                     <input type="checkbox"
@@ -126,11 +130,12 @@ class ParameterPanelView extends React.Component {
                                 </label>
                             </div>
                         
-                        <div>
-                            <Button onClick={this.getData} type="button" id= "button"
-                                className="btn  btn-default"  style={{fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold" }}>
+                        <div>{this.props.loading ? <Spinner animation="border" role="status" className = "spinner" size="m" /> :
+                            <Button type="button" id="load-serialized-data-button" 
+                            onClick={() => this.getData()}
+                                className="btn  btn-default"  style={{fontFamily: "Montserrat", backgroundColor: "#2DC5C9", color: "black", fontWeight: "bold", marginTop: "5vh" }}>
                                 Pobierz
-                            </Button>
+                            </Button>}
                         </div>
                         </div>
                 </div>

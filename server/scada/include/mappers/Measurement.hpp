@@ -27,7 +27,7 @@ class Measurement : public Entity {
         static const std::string mapEntityToSQLSelect(const boost::python::dict& args);
         /**
          * Mapowanie wektora z bazy danych na poszczególne pomiary
-         *//
+         */
         static std::unique_ptr<std::vector<Measurement>> mapToMeasurements(std::unique_ptr<std::vector<std::string>> stringVector);
     private:
         double value;
