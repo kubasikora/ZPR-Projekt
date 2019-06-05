@@ -41,6 +41,9 @@ server/scada/build/
 server/scada/libs/
 *.dblite
 server/scada/libscada.so
+server/scada/code_coverage_report/
+*.info
+server/.coverage
 
 # python files 
 .pytest_cache/
@@ -55,6 +58,7 @@ server/__tests__/__pycache__
 *.fls 
 *.log
 *.out
+*.pdf
 *.synctex.gz
 
 # environmental variables

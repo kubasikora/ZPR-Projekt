@@ -23,7 +23,7 @@ else:
     AUTH = True
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
-    Config = ProdConfig()
+    Config = DevConfig() # problem z bazą
 
 app.config.from_object(Config)
 
@@ -107,7 +107,7 @@ def new_user():
     db.session.add(user)
     db.session.commit()
 
-    return Response(response="User added", statusCode=201)
+    return Response(response="User added", status=201)
 
 
 @app.route('/login', methods=['GET'])
@@ -118,7 +118,6 @@ def login():
 ### resources 
 
 @app.route('/measurement', methods = ['POST'])
-@auth.login_required
 def measurement():
     controller = MeasurementController(db_config)
     response = controller.postNewMeasurement(request.form)

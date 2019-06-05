@@ -14,7 +14,12 @@
 #include<boost/python/extract.hpp>
 #include<boost/python/object.hpp>
 
+#define protected public
+#define private   public
 #include"mappers/Device.hpp"
+#undef protected
+#undef private
+
 
 BOOST_AUTO_TEST_SUITE( DeviceTests )
 
@@ -29,6 +34,108 @@ BOOST_AUTO_TEST_CASE( createsMeasurementFromStrings ) {
     const std::string exampleMaxValue = "10";
     BOOST_IS_DEFINED( zpr::Device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue));
 }
+
+BOOST_AUTO_TEST_CASE( testDeviceId ) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.id, 1L);
+
+}
+
+
+BOOST_AUTO_TEST_CASE( testIdOnNoParams ) {
+    zpr::Device device;
+    BOOST_CHECK_EQUAL(device.id, 0);
+
+}
+
+BOOST_AUTO_TEST_CASE( testDeviceSerialCode ) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.serialCode, exampleSerialCode);
+}
+
+BOOST_AUTO_TEST_CASE( testDeviceModel ) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.model, exampleModel);
+}
+
+BOOST_AUTO_TEST_CASE( testDeviceProducer ) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.producer, exampleProducer);
+}
+
+BOOST_AUTO_TEST_CASE( testDeviceUnit) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.unit, exampleUnit);
+}
+
+BOOST_AUTO_TEST_CASE( testDeviceMin ) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.minValue, 0.2);
+}
+
+BOOST_AUTO_TEST_CASE( testDeviceMax) {
+
+    const std::string exampleDeviceId = "1";
+    const std::string exampleSerialCode = "1893274832";
+    const std::string exampleModel = "ModelX";
+    const std::string exampleProducer = "ProducerX";
+    const std::string exampleUnit = "u";
+    const std::string exampleMinValue = "0.2";
+    const std::string exampleMaxValue = "10";
+    zpr::Device device(exampleDeviceId,exampleSerialCode,exampleModel,exampleProducer,exampleUnit,exampleMinValue,exampleMaxValue);
+    BOOST_CHECK_EQUAL(device.maxValue, 10.0);
+}
+
+
+
 
 BOOST_AUTO_TEST_CASE( createsMeasurementFromDict ) {
     Py_Initialize();

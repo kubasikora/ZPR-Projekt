@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd server && python main.py -d&
+cd server && python main.py&
 PIDPY=$!
 
-cd client && npm start&
+cd client && npm start > /dev/null&
 PIDJS=$!
 
 python3 simulate_device.py 1 25.00 1.0 &
