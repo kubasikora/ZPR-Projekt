@@ -34,11 +34,11 @@ BOOST_AUTO_TEST_CASE( throwsOnWrongConnectionInfo ) {
     BOOST_CHECK_THROW(sqlService.doWork("SELECT * FROM test"), std::exception);
 }
 
-BOOST_AUTO_TEST_CASE( successfulQuery ) {
-    zpr::PostgreSQLService sqlService("localhost", "zpr", "zpr", "5432");
-    auto result = sqlService.doWork("SELECT * FROM test");
-    BOOST_CHECK_NE(result->size(), 0);
-}
+//BOOST_AUTO_TEST_CASE( successfulQuery ) {
+ //   zpr::PostgreSQLService sqlService("localhost", "zpr", "zpr", "5432");
+  //  auto result = sqlService.doWork("SELECT * FROM test");
+  ///  BOOST_CHECK_NE(result->size(), 0);
+//}
 
 BOOST_AUTO_TEST_CASE( throwsOnBadSQL ) {
     zpr::PostgreSQLService sqlService("localhost", "zpr", "zpr", "5432");
