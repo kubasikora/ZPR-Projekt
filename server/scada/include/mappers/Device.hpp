@@ -6,7 +6,10 @@
 #include"mappers/Entity.hpp"
 
 namespace zpr {
-
+/**
+ * Mapper urządzenia, z którego zbierane są jego pomiary.
+ * Atrybuty opisują parametry danego urządzenia.
+ */
 class Device : public Entity {
     public:
         Device();

@@ -9,6 +9,9 @@
 namespace zpr {
 
 class StateService {
+    /**
+     * Serwis zajmujący się bieżącymi pomiarami
+     */
     public:
         static StateService* getInstance();
         void updateState(const int deviceId, const double measurementValue);

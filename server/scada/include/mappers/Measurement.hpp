@@ -6,17 +6,28 @@
 #include"mappers/Entity.hpp"
 
 namespace zpr {
-
+/**
+ * Klasa będąca reprezentacją pomiarów.
+ */
 class Measurement : public Entity {
     public:
         Measurement();
         Measurement(const std::string id, const std::string value, const std::string timestamp, const std::string deviceId);
         Measurement(const boost::python::dict& request);
+        /**
+         * Wytworzenie polecenia INSERT do bazy danych na podstawie atrybutów obiektu
+         */
         virtual const std::string mapEntityToSQLInsert() const;
         double getValue() const;
         long getDeviceId() const;
         std::string getTimestamp() const;
+        /**
+         * Pobieranie danych z bazy na podstawie argumentów z REST
+         */
         static const std::string mapEntityToSQLSelect(const boost::python::dict& args);
+        /**
+         * Mapowanie wektora z bazy danych na poszczególne pomiary
+         */
         static std::unique_ptr<std::vector<Measurement>> mapToMeasurements(std::unique_ptr<std::vector<std::string>> stringVector);
     private:
         double value;

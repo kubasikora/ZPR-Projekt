@@ -7,9 +7,14 @@
 #include<boost/python/dict.hpp>
 #include<boost/python/tuple.hpp>
 namespace zpr {
-
+/**
+* Kontroler bazy danych
+*/
 class DatabaseController {
     public:
+    /**
+     * @params env słownik z parametrami niezbędnymi do nawiązania połączenia z bazą danych
+     */
         DatabaseController(const boost::python::dict& env);
 
     protected:

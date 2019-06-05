@@ -6,7 +6,9 @@
 #include"controllers/RESTServiceController.hpp"
 
 namespace zpr {
-
+/**
+ * Kontroler odpowiedzialny za zwracanie bieżących pomiarów z urządzeń.
+*/
 class StateController : public RESTServiceController {
     public:
         double getValue(const int deviceId) const;

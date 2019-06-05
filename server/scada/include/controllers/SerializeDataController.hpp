@@ -12,10 +12,16 @@
 #include<boost/python/tuple.hpp>
 
 namespace zpr {
-
+/**
+ * Kontroler odpowiedzialny za zadanie serializacji danych
+ */
 class SerializeDataController : public DatabaseController, public RESTServiceController {
     public:
         SerializeDataController(const boost::python::dict& env) : DatabaseController(env) {}
+        /**
+         * @param arguments - argumenty z HTTP GET niezbędne do pobrania danych
+         * Zarządza całym procesem serializacji. Zwraca dane w odpowiednim formacie.
+         */
         boost::python::dict getSerializedData(const boost::python::dict& arguments);
 };
 

@@ -8,7 +8,9 @@
 #include"services/DatabaseService.hpp"
 
 namespace zpr {
-
+/**
+ * Zapewnienie interfejsu do współpracy z konkretną bazą danych
+ */
 class PostgreSQLService : public DatabaseService {
     public:
         PostgreSQLService(const std::string host, const std::string user, const std::string password, const std::string port);
