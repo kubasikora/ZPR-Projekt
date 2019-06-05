@@ -10,12 +10,22 @@ namespace zpr {
 
 class StateService {
     /**
-     * Serwis zajmujący się bieżącymi pomiarami
+     * Serwis zajmujący się bieżącymi pomiarami - singleton.
      */
     public:
         static StateService* getInstance();
+        /**
+         * Aktualizacja bieżącego stanu konkretnego urządzenia
+         * @params deviceId - identyfikator urządzenia, którego stan zostanie zaktualizowany
+         */
         void updateState(const int deviceId, const double measurementValue);
+        /**
+         * Pobranie aktualnej wartości pomiaru dla konkretnego urządzenia
+         */
         double getValue(const int deviceId);
+        /**
+         * Mapowanie najnowszych wyników pomiarów wszystkich urządzeń na listę, która zostanie przesłana użytkownikowi.
+         */
         boost::python::list mapToPythonList();
     private:
         StateService() {}
