@@ -99,6 +99,6 @@ BOOST_AUTO_TEST_CASE( mapsToPythonDict ) {
     boost::python::list list = boost::python::extract<boost::python::list>(result["data"]);
     BOOST_CHECK(list);
     boost::python::dict element = boost::python::extract<boost::python::dict>(list[0]);
-    BOOST_CHECK_EQUAL(boost::python::extract<int>(element["value"]),10);
+    BOOST_CHECK_EQUAL(boost::python::extract<double>(element["value"]),10);
 }
 BOOST_AUTO_TEST_SUITE_END()
