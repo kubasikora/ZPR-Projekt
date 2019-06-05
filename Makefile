@@ -50,7 +50,7 @@ cpp_test:
 	$(RUN_CPP_TEST) --show_progress --random
 
 selenium_test:
-	selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless]" ZPR-Projekt.side
+	selenium-side-runner -c "browserName=chrome chromeOptions.args=[headless, incognito]" ZPR-Projekt.side
 
 test:
 	$(RUN_CPP_TEST) --show_progress --random

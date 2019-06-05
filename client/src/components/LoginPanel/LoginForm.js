@@ -9,7 +9,7 @@ const LoginForm = props => {
                 <Form.Label style={{fontWeight: "bold", display: "block", textAlign: "center"}}>Login</Form.Label>
                 <Form.Control id="login-form" type="login" placeholder="Wprowadź login" />
                 <Form.Text style={{marginLeft: "1vw", color: "#ff0000"}}>
-                    {props.info === "" ? <br/> : props.info }
+                    {props.info === "" ? <br/> : <span id="bad-login-info">{props.info}</span> }
                 </Form.Text>
             </Form.Group>
 
