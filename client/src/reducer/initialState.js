@@ -6,6 +6,7 @@ const initialState = {
     data: {
         loading: false,
         data: [],
+        error: ""
     },
     processState: {
         devices: [

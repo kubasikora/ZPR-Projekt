@@ -22,7 +22,7 @@ const getData = state => {
 
       Promise.all(promises).then(responses => {
         responses.forEach(response => dispatch({type: GET_DATA_OK, data: response.data}));
-      }).catch(error => dispatch({type: GET_DATA_ERROR}));
+      }).catch(error => dispatch({type: GET_DATA_ERROR, payload: error.response.data.returnMessage}));
       /*
       state.checked.forEach(element => {
         let args = {

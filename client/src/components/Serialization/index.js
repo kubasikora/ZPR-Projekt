@@ -4,7 +4,8 @@ import SerializationView from './SerializationView'
 const mapStateToProps = (state, ownProps) => {
   return {
     loading : state.data.loading,
-    data: state.data.data
+    data: state.data.data,
+    error : state.data.error
   }
 }
 

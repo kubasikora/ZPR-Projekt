@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Header from "../Header";
+import Error from "./Error"
 class SerializationView extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,8 @@ class SerializationView extends React.Component {
                 {this.props.loading ?
                   <Spinner animation="border" role="status" className="spinner" size="m">
                     <span className="sr-only">Ładowanie...</span>
-                  </Spinner> : this.props.data[0] ? <Graphs /> : null}
+                  </Spinner> : this.props.data[0] ? <Graphs /> : 
+                  <Error content={this.props.error} />}
               </div>
             </Col>
             <Col md={4}>
