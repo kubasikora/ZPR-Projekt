@@ -9,28 +9,32 @@ describe("dataReducers test",()=>{
         };
         expect(app(initialState, action).data).toEqual({
             loading: true,
-            data : []
+            data : [],
+            error: ""
         });
 
     });
     it('Getting data OK',()=>{
         const action ={
             type: actionTypes.GET_DATA_OK,
-            data: "OK"
+            data: "OK",
         }
         expect(app(initialState, action).data).toEqual({
             loading: false,
-            data: ["OK"]
+            data: ["OK"],
+            error: ""
         })
 
     });
     it('Getting data error',()=>{
         const action ={
             type: actionTypes.GET_DATA_ERROR,
+            payload: "ERROR"
         }
         expect(app(initialState, action).data).toEqual({
             loading: false,
-            data: []
+            data: [],
+            error: "ERROR"
         })
 
     });
